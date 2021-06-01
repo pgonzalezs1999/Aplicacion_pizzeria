@@ -8,18 +8,18 @@ public class Main
 		Vector<Base> listaBases = new Vector<Base>();
 		Vector<Ingrediente> listaIngr = new Vector<Ingrediente>();
 		
-		Base baseAux = new Base("Base pequeña", true, 1.5, "Pequeña");
+		Base baseAux = new Base("Base pequeï¿½a", true, 1.5, "Pequeï¿½a");
 		listaBases.add(baseAux);
 		baseAux = new Base("Base grande", true, 3.75, "Grande");
 		listaBases.add(baseAux);
-		baseAux = new Base("Base pequeña sin gluten", true, 2, "Pequeña");
+		baseAux = new Base("Base pequeï¿½a sin gluten", true, 2, "Pequeï¿½a");
 		listaBases.add(baseAux);
 		baseAux = new Base("Base grande sin gluten", true, 4.5, "Grande");
 		listaBases.add(baseAux);
 		
 		Ingrediente ingrAux = new Ingrediente("Queso", true, 0.6);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Queso sin glúten", false, 0.9);
+		ingrAux = new Ingrediente("Queso sin glï¿½ten", false, 0.9);
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Tomate", false, 0.65);
 		listaIngr.add(ingrAux);
@@ -27,11 +27,11 @@ public class Main
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Bacon", false, 1.25);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Jamón York", true, 0.75);
+		ingrAux = new Ingrediente("Jamï¿½n York", true, 0.75);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Jamón Serrano", true, 1.2);
+		ingrAux = new Ingrediente("Jamï¿½n Serrano", true, 1.2);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Atún", false, 0.65);
+		ingrAux = new Ingrediente("Atï¿½n", false, 0.65);
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Anchoas", false, 0.75);
 		listaIngr.add(ingrAux);
@@ -45,10 +45,10 @@ public class Main
 		
 		do
 		{
-			System.out.println("BIENVENIDO A PIZZERÍAS MANOLO");
+			System.out.println("BIENVENIDO A PIZZERï¿½AS MANOLO");
 			System.out.println("Pulse (0) para terminar el pedido"
-					+ "\nPulse (1) para añadir una pizza"
-					+ "\nPulse (2) para eliminar la última pizza"
+					+ "\nPulse (1) para aï¿½adir una pizza"
+					+ "\nPulse (2) para eliminar la ï¿½ltima pizza"
 					+ "\nPulse (3) para ver las pizzas encargadas");
 			String opcion = sc.nextLine();
 			switch(opcion)
@@ -56,13 +56,14 @@ public class Main
 				case "0":
 					if(orden.getPizzas().isEmpty() == false)
 					{
-						System.out.println("Enviando pedido... Llegará en unos 25 minutos");
-						System.out.println("El coste de su pedido es: " + orden.calcularCostePedido() + "€");					
+						System.out.println("Enviando pedido... Llegarï¿½ en unos 25 minutos");
+						System.out.println("El coste de su pedido es: " + orden.calcularCostePedido() + "ï¿½");
+						System.out.println("Hola");					
 						puedeSalir = true;
 					}
 					else
 					{
-						System.out.println("No emitimos pedidos vacíos. Regresando al menú...\n");
+						System.out.println("No emitimos pedidos vacï¿½os. Regresando al menï¿½...\n");
 						puedeSalir = false;
 					}
 				break;
@@ -80,11 +81,11 @@ public class Main
 							nuevaPizza.setNombre("Pizza" + String.valueOf(orden.getPizzas().size()+1));							
 						}
 						
-						System.out.println("¿Qué tipo de base prefiere?");
+						System.out.println("ï¿½Quï¿½ tipo de base prefiere?");
 						for(int i = 0; i < listaBases.size(); i++)
 						{
 							System.out.println("Pulse ("+ (i+1) +") para " + listaBases.get(i).getTipo()
-									+ " -> " + listaBases.get(i).getPrecio() + "€");
+									+ " -> " + listaBases.get(i).getPrecio() + "ï¿½");
 						}
 						opcion = sc.nextLine();
 						nuevaPizza.ponerBase(listaBases.get(Integer.parseInt(opcion)-1));
@@ -92,7 +93,7 @@ public class Main
 						boolean puedeSalir2 = false;
 						do
 						{
-							System.out.println("¿Qué ingrediente desea añadir?");
+							System.out.println("ï¿½Quï¿½ ingrediente desea aï¿½adir?");
 							for(int i = 0; i < listaIngr.size(); i++)
 							{
 								boolean yaPuesto = false;
@@ -105,15 +106,15 @@ public class Main
 								}
 								if(yaPuesto == false)
 								{
-									System.out.println("Pulse ("+ (i+1) +") para añadir " + listaIngr.get(i).getNombre()
-											+ " -> " + listaIngr.get(i).getPrecio() + "€");
+									System.out.println("Pulse ("+ (i+1) +") para aï¿½adir " + listaIngr.get(i).getNombre()
+											+ " -> " + listaIngr.get(i).getPrecio() + "ï¿½");
 								}
 								else
 								{
-									System.out.println("--- " + listaIngr.get(i).getNombre() + " ya añadido --- ");
+									System.out.println("--- " + listaIngr.get(i).getNombre() + " ya aï¿½adido --- ");
 								}
 							}
-							System.out.println("Pulse (0) si no desea añadir más ingredientes");
+							System.out.println("Pulse (0) si no desea aï¿½adir mï¿½s ingredientes");
 							
 							int opcion2 = sc.nextInt();
 							sc.nextLine();
@@ -129,11 +130,11 @@ public class Main
 						while(puedeSalir2 == false);
 						
 						orden.aniadirPizza(nuevaPizza);
-						System.out.println("Pizza añadida correctamente. Regresando al menú...\n");
+						System.out.println("Pizza aï¿½adida correctamente. Regresando al menï¿½...\n");
 					}
 					catch(Exception e)
 					{
-						System.out.println("Valor introducido incorrecto. Regresando al menú...\n");
+						System.out.println("Valor introducido incorrecto. Regresando al menï¿½...\n");
 						//e.printStackTrace();
 					}
 					
@@ -159,16 +160,16 @@ public class Main
 									paraCeliaco = false;
 								}
 							}
-							System.out.println("    Precio: " + Math.round(orden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + "€");
+							System.out.println("    Precio: " + Math.round(orden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + "ï¿½");
 						}
-						System.out.println("\nPrecio total: " + Math.round(orden.calcularCostePedido()*100.0)/100.0 + "€");
+						System.out.println("\nPrecio total: " + Math.round(orden.calcularCostePedido()*100.0)/100.0 + "ï¿½");
 						if(paraCeliaco == true)
 						{
-							System.out.println("Su pedido SI es apto para celíacos\n");			
+							System.out.println("Su pedido SI es apto para celï¿½acos\n");			
 						}
 						else
 						{
-							System.out.println("Su pedido NO es apto para celíacos\n");
+							System.out.println("Su pedido NO es apto para celï¿½acos\n");
 						}						
 					}
 					else
