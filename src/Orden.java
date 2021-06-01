@@ -22,7 +22,7 @@ public class Orden
 			if(pizzas.isEmpty() == false)
 			{
 				pizzas.remove(pizzas.lastElement());
-				System.out.println("Pizza eliminada correctamente. Regresando al menú...\n");
+				System.out.println("Pizza eliminada correctamente. Regresando al menu...\n");
 			}
 			else
 			{
@@ -31,7 +31,7 @@ public class Orden
 		}
 		catch(Exception e)
 		{
-			System.out.println("No se ha podido eliminar la última pizza");
+			System.out.println("No se ha podido eliminar la ultima pizza");
 			e.printStackTrace();
 		}
 	}
