@@ -1,3 +1,5 @@
+package noMVC;
+
 public class Base
 {
 	private String tipo;
@@ -5,7 +7,7 @@ public class Base
 	private double precio;
 	private String tamanio;
 	
-	Base(String nuevoTipo, boolean nuevoGluten, double nuevoPrecio, String nuevoTamanio)
+	public Base(String nuevoTipo, boolean nuevoGluten, double nuevoPrecio, String nuevoTamanio)
 	{
 		this.tipo = nuevoTipo;
 		this.gluten = nuevoGluten;

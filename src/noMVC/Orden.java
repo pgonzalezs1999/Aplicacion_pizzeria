@@ -1,12 +1,14 @@
-import java.util.Date;
+package noMVC;
+
+//import java.util.Date;
 import java.util.Vector;
 
 public class Orden
 {
-	private String nombre;
-	private String direccion;
-	private int telefono;
-	private Date fecha_pedido;
+	//private String nombre;
+	//private String direccion;
+	//private int telefono;
+	//private Date fecha_pedido;
 	private Vector<Pizza> pizzas = new Vector<Pizza>();
 	private boolean entregado;
 	
@@ -63,5 +65,10 @@ public class Orden
 	public Vector<Pizza> getPizzas()
 	{
 		return this.pizzas;
+	}
+	
+	public boolean getEntregado()
+	{
+		return this.entregado;
 	}
 }

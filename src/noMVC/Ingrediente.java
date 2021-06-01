@@ -1,10 +1,12 @@
+package noMVC;
+
 public class Ingrediente
 {
 	private String nombre;
 	private boolean gluten;
 	private double precio;
 	
-	Ingrediente(String nuevoNombre, boolean nuevoGluten, double nuevoPrecio)
+	public Ingrediente(String nuevoNombre, boolean nuevoGluten, double nuevoPrecio)
 	{
 		this.nombre = nuevoNombre;
 		this.gluten = nuevoGluten;

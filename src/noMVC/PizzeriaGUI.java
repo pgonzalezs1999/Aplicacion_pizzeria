@@ -1,3 +1,5 @@
+package noMVC;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -14,7 +16,7 @@ public class PizzeriaGUI extends JFrame {
 	 */
 
 	 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -25,12 +27,12 @@ public class PizzeriaGUI extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public PizzeriaGUI() {
+	/*public PizzeriaGUI() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -38,6 +40,5 @@ public class PizzeriaGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-	}
-
+	}*/
 }
