@@ -1,0 +1,8 @@
+(ID order int),(pizza name string),Queso,Tomate,Queso sin gluten,Champiñones,Bacon,Aceitunas,Anchoas,Pimiento verde,York,Cebolla,Pollo,Pepperoni,Jamón serrano,Maíz,Atún,Cebolla caramelizada,Piña
+1,pizza1,1,0,0,1,1,0,1,1,0,0,1,0,0,1,0,1,1
+1,pizza2,0,1,1,1,0,1,1,1,0,0,0,0,1,0,0,0,0
+2,pizza1,1,0,0,0,0,1,1,0,0,0,1,0,1,0,1,0,0
+2,pizza2,0,1,1,1,0,1,1,1,0,0,0,0,1,0,0,0,0
+2,pizza3,1,0,0,1,1,0,1,1,0,0,1,0,0,1,0,1,1
+3,pizza1,1,0,0,1,1,0,1,1,0,0,1,0,0,1,0,1,1
+4,pizza1,0,1,1,1,0,1,1,1,0,0,0,0,1,0,0,0,0
