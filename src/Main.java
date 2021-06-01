@@ -45,7 +45,7 @@ public class Main
 		
 		do
 		{
-			System.out.println("BIENVENIDO A PIZZERiAS MANOLO");
+			System.out.println("BIENVENIDO A PIZZERIAS MANOLO");
 			System.out.println("Pulse (0) para terminar el pedido"
 					+ "\nPulse (1) para agregar una pizza"
 					+ "\nPulse (2) para eliminar la ultima pizza"
@@ -57,8 +57,7 @@ public class Main
 					if(orden.getPizzas().isEmpty() == false)
 					{
 						System.out.println("Enviando pedido... Llegara en unos 25 minutos");
-						System.out.println("El coste de su pedido es: " + orden.calcularCostePedido() + "€");
-						System.out.println("Hola");					
+						System.out.println("El coste de su pedido es: " + orden.calcularCostePedido() + "€");				
 						puedeSalir = true;
 					}
 					else
