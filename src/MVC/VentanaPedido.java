@@ -2,13 +2,11 @@ package MVC;
 
 //import java.awt.BorderLayout;
 //import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
-
+import java.awt.Font;
 import javax.swing.JButton;
 //import java.awt.event.ActionListener;
 //import java.awt.event.ActionEvent;
@@ -22,6 +20,8 @@ public class VentanaPedido extends JFrame
 	private JButton btnVerPedido;
 	private JButton btnEnviarPedido;
 	private JButton btnCancelarPedido;
+	
+	Color rojoSuave = new Color(255, 200, 200);
 	
 	/**
 	 * Create the frame.
@@ -53,8 +53,7 @@ public class VentanaPedido extends JFrame
 		contentPane.add(btnEnviarPedido);
 		
 		btnCancelarPedido = new JButton("Cancelar pedido");
-		btnCancelarPedido.setBounds(12, 190, 408, 25);
-		Color rojoSuave = new Color(255, 200, 200);
+		btnCancelarPedido.setBounds(12, 190, 408, 25);	
 		btnCancelarPedido.setBackground(rojoSuave);
 		contentPane.add(btnCancelarPedido);
 	}
