@@ -1,4 +1,4 @@
-package noMVC;
+package modelo;
 
 import java.util.Vector;
 

@@ -1,4 +1,4 @@
-package noMVC;
+package modelo;
 
 //import java.util.Date;
 import java.util.Vector;
@@ -24,7 +24,7 @@ public class Orden
 			if(pizzas.isEmpty() == false)
 			{
 				pizzas.remove(pizzas.lastElement());
-				System.out.println("Pizza eliminada correctamente. Regresando al menu...\n");
+				System.out.println("Pizza eliminada correctamente\n");
 			}
 			else
 			{

@@ -1,4 +1,4 @@
-package MVC;
+package mvc;
 
 //import java.awt.BorderLayout;
 //import java.awt.EventQueue;
@@ -10,7 +10,7 @@ import javax.swing.JButton;
 //import java.awt.event.ActionListener;
 //import java.awt.event.ActionEvent;
 
-public class VentanaPizza extends JFrame
+public class VentanaHistorial extends JFrame
 {
 	// Atributos
 	private JPanel contentPane;
@@ -19,11 +19,11 @@ public class VentanaPizza extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPizza()
+	public VentanaHistorial()
 	{
-		setTitle("Ventana Pedido");
+		setTitle("Ventana Historial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 200, 450, 300);
+		setBounds(250, 100, 1000, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

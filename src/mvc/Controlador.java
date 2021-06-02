@@ -1,13 +1,13 @@
-package MVC;
+package mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 import java.util.Vector;
 
-import noMVC.Base;
-import noMVC.Ingrediente;
-import noMVC.Orden;
-import noMVC.Pizza;
+import modelo.Base;
+import modelo.Ingrediente;
+import modelo.Orden;
+import modelo.Pizza;
 
 public class Controlador
 {
@@ -111,7 +111,7 @@ public class Controlador
 							}
 							if(yaPuesto == false)
 							{
-								System.out.println("Pulse ("+ (i+1) +") para agregarr " + listaIngr.get(i).getNombre()
+								System.out.println("Pulse ("+ (i+1) +") para agregar " + listaIngr.get(i).getNombre()
 										+ " -> " + listaIngr.get(i).getPrecio() + "€");
 							}
 							else
@@ -159,35 +159,39 @@ public class Controlador
 			{
 				if(orden.getPizzas().isEmpty() == false)
 				{
+					String[][] matrizAux = new String[orden.getPizzas().size()][5];
+					
 					boolean paraCeliaco = true;
 					for(int i = 0; i < orden.getPizzas().size(); i++)
 					{
-						System.out.println("\n+ " + orden.getPizzas().get(i).getNombre() + ":");
-						System.out.println("    Base: " + orden.getPizzas().get(i).getBase().getTipo());
-						System.out.println("    Ingredientes: ");
-						for(int j = 0; j < orden.getPizzas().get(i).getIngredientes().size(); j++)
+						matrizAux[i][0] = orden.getPizzas().get(i).getNombre();
+						matrizAux[i][1] = orden.getPizzas().get(i).getBase().getTipo();
+						
+						matrizAux[i][2] = orden.getPizzas().get(i).getIngredientes().get(0).getNombre() + ", ";
+						for(int j = 1; j < orden.getPizzas().get(i).getIngredientes().size(); j++)
 						{
-							System.out.println("       - " + orden.getPizzas().get(i).getIngredientes().get(j).getNombre());
+							matrizAux[i][2] = matrizAux[i][2] + orden.getPizzas().get(i).getIngredientes().get(j).getNombre() + ", ";
 							if(orden.getPizzas().get(i).getIngredientes().get(j).getGluten() == true)
 							{
 								paraCeliaco = false;
 							}
 						}
-						System.out.println("    Precio: " + Math.round(orden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + "�");
+						matrizAux[i][3] = Math.round(orden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + " euros";
+						matrizAux[i][4] = Math.round(orden.calcularCostePedido()*100.0)/100.0 + " euros";
 					}
-					System.out.println("\nPrecio total: " + Math.round(orden.calcularCostePedido()*100.0)/100.0 + "€");
 					if(paraCeliaco == true)
 					{
-						System.out.println("Su pedido SI es apto para celiacos\n");			
+						concatenar(ventanaPedido.getLabelDesgloseText(), ("Su pedido SI es apto para celiacos\n"));			
 					}
 					else
 					{
-						System.out.println("Su pedido NO es apto para celiacos\n");
-					}						
+						concatenar(ventanaPedido.getLabelDesgloseText(), ("Su pedido NO es apto para celiacos\n"));
+					}
+					ventanaPedido.CrearTablaPizzas(matrizAux);
 				}
 				else
 				{
-					System.out.println("Ninguna pizza encargada. Regresando al menu...\n");
+					ventanaPedido.setLabelDesgloseText("Ninguna pizza encargada");
 				}
 			}
 		});
@@ -268,6 +272,10 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPizza.setVisible(false);
+	}
+	public void concatenar(String original, String extra)
+	{
+		original = original + "" + extra; 
 	}
 	private void IniciarControlador()
 	{

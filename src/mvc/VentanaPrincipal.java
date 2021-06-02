@@ -1,4 +1,4 @@
-package MVC;
+package mvc;
 
 //import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -23,7 +23,7 @@ public class VentanaPrincipal extends JFrame
 	{
 		setTitle("Ventana Principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 200, 450, 300);
+		setBounds(250, 100, 1000, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -40,6 +40,22 @@ public class VentanaPrincipal extends JFrame
 		btnVerHistorial = new JButton("Ver historial de pedidos");
 		btnVerHistorial.setBounds(12, 110, 408, 25);
 		contentPane.add(btnVerHistorial);
+	}
+	
+	public void ActivarBuilder()
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					VentanaPedido frame = new VentanaPedido();
+					frame.setVisible(true);
+				}
+				catch (Exception e) { e.printStackTrace(); }
+			}
+		});
 	}
 
 	// Getters/Setters
