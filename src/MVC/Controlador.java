@@ -20,21 +20,25 @@ public class Controlador
 	// Atributos MVC	
 	VentanaPrincipal ventanaPrincipal;
 	VentanaPedido ventanaPedido;
+	VentanaPizza ventanaPizza;
 	VentanaHistorial ventanaHistorial;
 	
 	// Constructor
 	public Controlador(VentanaPrincipal ventanaPrincipal,
 						VentanaPedido ventanaPedido,
+						VentanaPizza ventanaPizza,
 						VentanaHistorial ventanaHistorial)
 	{
 		IniciarControlador();
 		
 		this.ventanaPrincipal = ventanaPrincipal;
 		this.ventanaPedido = ventanaPedido;
+		this.ventanaPizza = ventanaPizza;
 		this.ventanaHistorial = ventanaHistorial;
 		
 		this.crearListenersVentanaPrincipal();
 		this.crearListenersVentanaPedido();
+		this.crearListenersVentanaPizza();
 		this.crearListenersVentanaHistorial();
 		
 		this.ventanaPrincipal.setVisible(true);
@@ -66,6 +70,8 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				//AbrirPizzaDesdePedido();
+				
 				try
 				{
 					String opcion;
@@ -210,6 +216,17 @@ public class Controlador
 			}
 		});
 	}
+	private void crearListenersVentanaPizza()
+	{
+		//---- Listeners Ventana Historial ----//
+		this.ventanaHistorial.getBtnVolver().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				AbrirPedidoDesdePizza();
+			}
+		});
+	}
 	private void crearListenersVentanaHistorial()
 	{
 		//---- Listeners Ventana Historial ----//
@@ -241,6 +258,16 @@ public class Controlador
 	{
 		this.ventanaPrincipal.setVisible(true);
 		this.ventanaPedido.setVisible(false);
+	}
+	private void AbrirPizzaDesdePedido()
+	{
+		this.ventanaPizza.setVisible(true);
+		this.ventanaPedido.setVisible(false);
+	}
+	private void AbrirPedidoDesdePizza()
+	{
+		this.ventanaPedido.setVisible(true);
+		this.ventanaPizza.setVisible(false);
 	}
 	private void IniciarControlador()
 	{

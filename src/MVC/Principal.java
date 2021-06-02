@@ -10,10 +10,12 @@ public class Principal
 		// Vistas
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		VentanaPedido ventanaPedido = new VentanaPedido();
+		VentanaPizza ventanaPizza = new VentanaPizza();
 		VentanaHistorial ventanaHistorial = new VentanaHistorial();
 		
 		Controlador controlador = new Controlador(ventanaPrincipal,
 													ventanaPedido,
+													ventanaPizza,
 													ventanaHistorial);
 	}
 }
