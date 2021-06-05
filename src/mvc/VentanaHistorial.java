@@ -23,7 +23,7 @@ public class VentanaHistorial extends JFrame
 	{
 		setTitle("Ventana Historial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(250, 100, 1000, 600);
+		setBounds(250, 100, 700, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

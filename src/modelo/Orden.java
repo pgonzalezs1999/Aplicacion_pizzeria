@@ -5,12 +5,18 @@ import java.util.Vector;
 
 public class Orden
 {
+	private int ID;
 	//private String nombre;
 	//private String direccion;
 	//private int telefono;
 	//private Date fecha_pedido;
 	private Vector<Pizza> pizzas = new Vector<Pizza>();
 	private boolean entregado;
+	
+	public Orden()
+	{
+		// Leer el CSV de pedidos y ver cual es el primer ID no usado disponible
+	}
 	
 	public void aniadirPizza(Pizza nuevaPizza)
 	{
@@ -62,6 +68,13 @@ public class Orden
 		}
 	}
 	
+	public int generarID()
+	{
+		int nuevoID = 0;
+		
+		return nuevoID;
+	}
+	
 	public Vector<Pizza> getPizzas()
 	{
 		return this.pizzas;
@@ -70,5 +83,10 @@ public class Orden
 	public boolean getEntregado()
 	{
 		return this.entregado;
+	}
+	
+	public int getID()
+	{
+		return this.ID;
 	}
 }

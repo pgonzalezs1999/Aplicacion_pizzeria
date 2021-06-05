@@ -1,9 +1,9 @@
 package mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 import java.util.Vector;
 
+import ficheros.EditarCSV;
 import modelo.Base;
 import modelo.Ingrediente;
 import modelo.Orden;
@@ -14,8 +14,10 @@ public class Controlador
 	Vector<Base> listaBases = new Vector<Base>();
 	Vector<Ingrediente> listaIngr = new Vector<Ingrediente>();
 	
-	Orden orden = new Orden();
-	Scanner sc = new Scanner(System.in); // Lo borraremos cuando ya no haga falta la consola
+	private Orden nuevaOrden;
+	private Pizza nuevaPizza;
+	private EditarCSV pizzasCSV = new EditarCSV("pizzas.csv");
+	private EditarCSV pedidosCSV = new EditarCSV("pedidos.csv");
 	
 	// Atributos MVC	
 	VentanaPrincipal ventanaPrincipal;
@@ -29,7 +31,7 @@ public class Controlador
 						VentanaPizza ventanaPizza,
 						VentanaHistorial ventanaHistorial)
 	{
-		IniciarControlador();
+		IniciarBasesIngredientes();
 		
 		this.ventanaPrincipal = ventanaPrincipal;
 		this.ventanaPedido = ventanaPedido;
@@ -42,6 +44,11 @@ public class Controlador
 		this.crearListenersVentanaHistorial();
 		
 		this.ventanaPrincipal.setVisible(true);
+		
+		pizzasCSV.cargarCSV();
+		pedidosCSV.cargarCSV();
+		
+		nuevaPizza = new Pizza();
 	}
 	
 	private void crearListenersVentanaPrincipal()
@@ -70,78 +77,9 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				//AbrirPizzaDesdePedido();
-				
-				try
-				{
-					String opcion;
-					Pizza nuevaPizza = new Pizza();
-					
-					if(orden.getPizzas().size() == 0)
-					{
-						nuevaPizza.setNombre("Pizza1");
-					}
-					else
-					{
-						nuevaPizza.setNombre("Pizza" + String.valueOf(orden.getPizzas().size()+1));							
-					}
-					
-					System.out.println("¿Que tipo de base prefiere?");
-					for(int i = 0; i < listaBases.size(); i++)
-					{
-						System.out.println("Pulse ("+ (i+1) +") para " + listaBases.get(i).getTipo()
-								+ " -> " + listaBases.get(i).getPrecio() + "€");
-					}
-					opcion = sc.nextLine();
-					nuevaPizza.ponerBase(listaBases.get(Integer.parseInt(opcion)-1));
-					
-					boolean puedeSalir2 = false;
-					do
-					{
-						System.out.println("Que ingrediente desea agregar?");
-						for(int i = 0; i < listaIngr.size(); i++)
-						{
-							boolean yaPuesto = false;
-							for(int j = 0; j < nuevaPizza.getIngredientes().size(); j++)
-							{
-								if(listaIngr.get(i).getNombre().equals(nuevaPizza.getIngredientes().get(j).getNombre()))
-								{
-									yaPuesto = true;
-								}
-							}
-							if(yaPuesto == false)
-							{
-								System.out.println("Pulse ("+ (i+1) +") para agregar " + listaIngr.get(i).getNombre()
-										+ " -> " + listaIngr.get(i).getPrecio() + "€");
-							}
-							else
-							{
-								System.out.println("--- " + listaIngr.get(i).getNombre() + " ya agregado --- ");
-							}
-						}
-						System.out.println("Pulse (0) si no desea agregarr mas ingredientes");
-						
-						int opcion2 = sc.nextInt();
-						sc.nextLine();
-						if(opcion2 == 0)
-						{
-							puedeSalir2 = true;
-						}
-						else
-						{
-							nuevaPizza.ponerIngrediente(listaIngr.get(opcion2 - 1));								
-						}
-					}
-					while(puedeSalir2 == false);
-					
-					orden.aniadirPizza(nuevaPizza);
-					System.out.println("Pizza agregada correctamente. Regresando al menu...\n");
-				}
-				catch(Exception e)
-				{
-					System.out.println("Valor introducido incorrecto. Regresando al menu...\n");
-					//e.printStackTrace();
-				}
+				nuevaPizza = new Pizza();
+				nuevaPizza.ponerBase(listaBases.get(3)); // Para que funcione provisionalmente, luego quitar esto
+				AbrirPizzaDesdePedido();
 			}
 		});
 		
@@ -149,7 +87,7 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				orden.eliminarUltimaPizza();
+				nuevaOrden.eliminarUltimaPizza();
 			}
 		});
 		
@@ -157,27 +95,27 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if(orden.getPizzas().isEmpty() == false)
+				if(nuevaOrden.getPizzas().isEmpty() == false)
 				{
-					String[][] matrizAux = new String[orden.getPizzas().size()][5];
+					String[][] matrizAux = new String[nuevaOrden.getPizzas().size()][5];
 					
 					boolean paraCeliaco = true;
-					for(int i = 0; i < orden.getPizzas().size(); i++)
+					for(int i = 0; i < nuevaOrden.getPizzas().size(); i++)
 					{
-						matrizAux[i][0] = orden.getPizzas().get(i).getNombre();
-						matrizAux[i][1] = orden.getPizzas().get(i).getBase().getTipo();
+						matrizAux[i][0] = nuevaOrden.getPizzas().get(i).getNombre();
+						matrizAux[i][1] = nuevaOrden.getPizzas().get(i).getBase().getTipo();
 						
-						matrizAux[i][2] = orden.getPizzas().get(i).getIngredientes().get(0).getNombre() + ", ";
-						for(int j = 1; j < orden.getPizzas().get(i).getIngredientes().size(); j++)
+						matrizAux[i][2] = nuevaOrden.getPizzas().get(i).getIngredientes().get(0).getNombre() + ", ";
+						for(int j = 1; j < nuevaOrden.getPizzas().get(i).getIngredientes().size(); j++)
 						{
-							matrizAux[i][2] = matrizAux[i][2] + orden.getPizzas().get(i).getIngredientes().get(j).getNombre() + ", ";
-							if(orden.getPizzas().get(i).getIngredientes().get(j).getGluten() == true)
+							matrizAux[i][2] = matrizAux[i][2] + nuevaOrden.getPizzas().get(i).getIngredientes().get(j).getNombre() + ", ";
+							if(nuevaOrden.getPizzas().get(i).getIngredientes().get(j).getGluten() == true)
 							{
 								paraCeliaco = false;
 							}
 						}
-						matrizAux[i][3] = Math.round(orden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + " euros";
-						matrizAux[i][4] = Math.round(orden.calcularCostePedido()*100.0)/100.0 + " euros";
+						matrizAux[i][3] = Math.round(nuevaOrden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + " euros";
+						matrizAux[i][4] = Math.round(nuevaOrden.calcularCostePedido()*100.0)/100.0 + " euros";
 					}
 					if(paraCeliaco == true)
 					{
@@ -200,14 +138,14 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if(orden.getPizzas().isEmpty() == false)
+				if(nuevaOrden.getPizzas().isEmpty() == false)
 				{
 					System.out.println("Enviando pedido... Llegara en unos 25 minutos");
-					System.out.println("El coste de su pedido es: " + orden.calcularCostePedido() + "€");
+					System.out.println("El coste de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
 				}
 				else
 				{
-					System.out.println("No emitimos pedidos vacios. Regresando al menu...\n");
+					System.out.println("No emitimos pedidos vacios");
 				}
 			}
 		});
@@ -216,6 +154,8 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				nuevaOrden.aniadirPizza(nuevaPizza);
+				
 				AbrirPrincipalDesdePedido();
 			}
 		});
@@ -223,11 +163,146 @@ public class Controlador
 	private void crearListenersVentanaPizza()
 	{
 		//---- Listeners Ventana Historial ----//
-		this.ventanaHistorial.getBtnVolver().addActionListener(new ActionListener()
+		this.ventanaPizza.getBtnEnviarPizza().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				AbrirPedidoDesdePizza();
+				if(nuevaPizza.getIngredientes().size() == 0)
+				{
+					System.out.println("No puede enviar una pizza sin ingredientes");
+				}
+				else
+				{
+					String nuevoNombre = "Pizza con ";
+					for(int i = 0; i < nuevaPizza.getIngredientes().size(); i++)
+					{
+						nuevoNombre = nuevoNombre + nuevaPizza.getIngredientes().get(i).getNombre() + " ";
+					}
+					nuevaPizza.setNombre(nuevoNombre);
+					
+					pizzasCSV.addPizza(nuevaOrden, nuevaPizza);
+					AbrirPedidoDesdePizza();
+				}
+			}
+		});
+		
+		this.ventanaPizza.getBtnQueso().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(0));
+			}
+		});
+		this.ventanaPizza.getBtnQuesoSinGluten().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(1));
+			}
+		});
+		this.ventanaPizza.getBtnTomate().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(2));
+			}
+		});
+		this.ventanaPizza.getBtnChampinones().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(3));
+			}
+		});
+		this.ventanaPizza.getBtnBacon().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(4));
+			}
+		});
+		this.ventanaPizza.getBtnAceitunas().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(5));
+			}
+		});
+		this.ventanaPizza.getBtnAnchoas().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(6));
+			}
+		});
+		this.ventanaPizza.getBtnPimiento().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(7));
+			}
+		});
+		this.ventanaPizza.getBtnYork().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(8));
+			}
+		});
+		this.ventanaPizza.getBtnSerrano().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(9));
+			}
+		});
+		this.ventanaPizza.getBtnCebolla().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(10));
+			}
+		});
+		this.ventanaPizza.getBtnCebollaCaram().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(11));
+			}
+		});
+		this.ventanaPizza.getBtnPollo().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(12));
+			}
+		});
+		this.ventanaPizza.getBtnPepperoni().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(13));
+			}
+		});
+		this.ventanaPizza.getBtnMaiz().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(14));
+			}
+		});
+		this.ventanaPizza.getBtnAtun().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(15));
+			}
+		});
+		this.ventanaPizza.getBtnPina().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.getIngredientes().add(listaIngr.get(16));
 			}
 		});
 	}
@@ -257,6 +332,7 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPrincipal.setVisible(false);
+		nuevaOrden = new Orden();
 	}
 	private void AbrirPrincipalDesdePedido()
 	{
@@ -277,16 +353,16 @@ public class Controlador
 	{
 		original = original + "" + extra; 
 	}
-	private void IniciarControlador()
+	private void IniciarBasesIngredientes()
 	{
 		// --- Elementos del Main de consola, a�adidos para probar que funciona el controlador
-		Base baseAux = new Base("Base pequena", true, 1.5, "Pequena");
+		Base baseAux = new Base("Pequena", true, 1.5, "Pequena");
 		listaBases.add(baseAux);
-		baseAux = new Base("Base grande", true, 3.75, "Grande");
+		baseAux = new Base("Grande", true, 3.75, "Grande");
 		listaBases.add(baseAux);
-		baseAux = new Base("Base pequena sin gluten", true, 2, "Pequena");
+		baseAux = new Base("Pequena sin gluten", true, 2, "Pequena");
 		listaBases.add(baseAux);
-		baseAux = new Base("Base grande sin gluten", true, 4.5, "Grande");
+		baseAux = new Base("Grande sin gluten", true, 4.5, "Grande");
 		listaBases.add(baseAux);
 		
 		Ingrediente ingrAux = new Ingrediente("Queso", true, 0.6);
@@ -295,19 +371,33 @@ public class Controlador
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Tomate", false, 0.65);
 		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Champinones", true, 0.75);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Bacon", true, 1.25);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Aceitunas", true, 1.25);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Anchoas", false, 0.5);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Pimiento", false, 0.6);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("York", true, 0.75);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Serrano", true, 1.2);
+		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Cebolla", false, 0.3);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Bacon", false, 1.25);
+		ingrAux = new Ingrediente("Cebolla caramelizada", false, 0.6);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Jamon York", true, 0.75);
+		ingrAux = new Ingrediente("Pollo", false, 0.45);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Jamon Serrano", true, 1.2);
+		ingrAux = new Ingrediente("Pepperoni", true, 0.85);
+		listaIngr.add(ingrAux);
+		ingrAux = new Ingrediente("Maiz", true, 0.3);
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("Atun", false, 0.65);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Anchoas", false, 0.75);
+		ingrAux = new Ingrediente("Pina", false, 0.8);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Pepperoni", true, 0.85);
-		listaIngr.add(ingrAux);		
 	}
 }
