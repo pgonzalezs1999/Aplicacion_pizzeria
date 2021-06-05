@@ -91,7 +91,7 @@ public class EditarCSV
 	public void addPizza(Orden orden, Pizza pizza) // Introduce una fila en la posición orden
 	{
 		String[][] nuevosDatos = new String[this.datos.length+1][this.datos[0].length]; // Se reserva espacio para una matriz con una fila más		
-		String[] listaIngr = new String[] {"Queso", "Queso sin gluten", "Tomate", "Champinones", "Bacon", "Aceitunas", "Anchoas", "Pimiento", "York", "Serrano", "Cebolla", "Cebolla caramelizada", "Pollo", "Pepperoni", "Maiz", "Atun", "Pina"};
+		String[] listaIngr = new String[] {"queso", "queso sin gluten", "tomate", "champinones", "bacon", "aceitunas", "anchoas", "pimiento", "york", "serrano", "cebolla", "cebolla caramelizada", "pollo", "pepperoni", "maiz", "atun", "pina"};
 		
 		for (int i = 1; i < nuevosDatos.length; i++) // Se recorre esa matriz asignando los valores de la anterior
 		{
@@ -101,31 +101,35 @@ public class EditarCSV
 		
 		datos[0][0] = String.valueOf(orden.getID());
 		datos[0][1] = pizza.getNombre();
-		System.out.println(pizza.getBase().getTipo());
 		datos[0][2] = pizza.getBase().getTipo();
 		
 		for(int j = 0; j < listaIngr.length; j++)
 		{
 			nuevosDatos[0][j+3] = "0";
 			for(int k = 0; k < pizza.getIngredientes().size(); k++)
-			{
-				System.out.println("k=" + k + ": " + pizza.getIngredientes().get(k).getNombre() + ", j=" + j + ": " + listaIngr[j]);
-				
+			{				
 				if(pizza.getIngredientes().get(k).getNombre().equals(listaIngr[j]) == true)
 				{
 					datos[0][j+3] = "1";
-					System.out.println("SON IGUALES!");
 				}				
 			}
 		}
-		System.out.println("Linea de pizza: " + datos[0][0] + ", "+ datos[0][1] + ", " 
-				+ datos[0][2] + ", " + datos[0][3] + ", " + datos[0][4] + ", "
-				+ datos[0][5] + ", " + datos[0][6] + ", " + datos[0][7] + ", "
-				+ datos[0][8] + ", " + datos[0][9] + ", " + datos[0][10] + ", "
-				+ datos[0][11] + ", " + datos[0][12] + ", " + datos[0][13] + ", "
-				+ datos[0][14] + ", " + datos[0][15] + ", " + datos[0][16] + ", "
-				+ datos[0][7] + ", " + datos[0][8] + ", " + datos[0][19]);
 		this.guardarCSV();
+	}
+	
+	public int generarID()
+	{
+		int resultado = 0;
+		
+		for(int i = 0; i < datos.length; i++)
+		{
+			if(Integer.parseInt(datos[i][0]) > resultado)
+			{
+				resultado = Integer.parseInt(datos[i][0]);
+			}
+		}
+		
+		return resultado + 1;
 	}
 
 	/*public void delFila(int orden) // Elimina la fila en la posición orden

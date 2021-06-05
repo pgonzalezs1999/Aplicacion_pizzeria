@@ -3,6 +3,8 @@ package modelo;
 //import java.util.Date;
 import java.util.Vector;
 
+import ficheros.EditarCSV;
+
 public class Orden
 {
 	private int ID;
@@ -15,7 +17,9 @@ public class Orden
 	
 	public Orden()
 	{
-		// Leer el CSV de pedidos y ver cual es el primer ID no usado disponible
+		EditarCSV leerPedidos = new EditarCSV("pedidos.csv");
+		leerPedidos.cargarCSV();
+		this.ID = leerPedidos.generarID();
 	}
 	
 	public void aniadirPizza(Pizza nuevaPizza)
@@ -66,13 +70,6 @@ public class Orden
 		{
 			System.out.println(pizzas.get(i).getNombre() + ", " + pizzas.get(i).calcularCostePizza());
 		}
-	}
-	
-	public int generarID()
-	{
-		int nuevoID = 0;
-		
-		return nuevoID;
 	}
 	
 	public Vector<Pizza> getPizzas()

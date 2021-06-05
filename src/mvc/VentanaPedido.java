@@ -2,6 +2,7 @@ package mvc;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -23,8 +24,9 @@ public class VentanaPedido extends JFrame
 	private JButton btnCancelarPedido;
 	
 	private JPanel contentPane;
+	private JPanel paneTabla;
 	
-	private JLabel labelDesglose;
+	private JLabel labelPrecio;
 	
 	private JTable tablaPizzas = new JTable();
 
@@ -36,6 +38,13 @@ public class VentanaPedido extends JFrame
 		setTitle("Ventana Pedido");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(250, 100, 700, 600);
+		
+		paneTabla = new JPanel();
+		paneTabla.setBounds(12, 270, 408, 100);
+		paneTabla.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(paneTabla);
+		paneTabla.setLayout(new BorderLayout());
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,9 +77,10 @@ public class VentanaPedido extends JFrame
 		btnCancelarPedido.setBackground(rojoSuave);
 		contentPane.add(btnCancelarPedido);
 				
-		labelDesglose = new JLabel();
-		labelDesglose.setBounds(12, 230, 408, 100);
-		contentPane.add(labelDesglose);
+		labelPrecio = new JLabel();
+		labelPrecio.setText("Hola");
+		labelPrecio.setBounds(12, 190, 408, 100);
+		contentPane.add(labelPrecio);
 	}
 	
 	public void ActivarBuilder()
@@ -91,17 +101,17 @@ public class VentanaPedido extends JFrame
 	
 	public void CrearTablaPizzas(String[][] datos)
 	{
-		String[] nombreColumnas = {"Nombre", "Base", "Ingredientes", "Precio", "Precio Acumulado"};
+		String[] nombreColumnas = {"Descripción", "Precio"};
 		tablaPizzas = new JTable(datos, nombreColumnas);
-		contentPane.add(tablaPizzas);
-		tablaPizzas.setBounds(12, 270, 408, 100);
-		tablaPizzas.setAutoResizeMode(5);
+		contentPane.add(contentPane);
+		tablaPizzas.setAutoResizeMode(tablaPizzas.AUTO_RESIZE_OFF);
+		tablaPizzas.setPreferredScrollableViewportSize(new Dimension(408, 100));
 	}
 	
 	// Getters/Setters
-	public void setLabelDesgloseText(String nuevoTexto)
+	public void setLabelPrecioText(String nuevoTexto)
 	{
-		labelDesglose.setText(nuevoTexto);
+		labelPrecio.setText(nuevoTexto);
 	}
 	public JButton getBtnAniadirPizza()
 	{
@@ -123,8 +133,8 @@ public class VentanaPedido extends JFrame
 	{
 		return btnCancelarPedido;
 	}
-	public String getLabelDesgloseText()
+	public String getLabelPrecioText()
 	{
-		return labelDesglose.getText();
+		return labelPrecio.getText();
 	}
 }

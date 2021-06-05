@@ -59,6 +59,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				AbrirPedidoDesdePrincipal();
+				ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
 			}
 		});
 		
@@ -77,8 +78,8 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				ventanaPizza.resetearVentana();
 				nuevaPizza = new Pizza();
-				nuevaPizza.ponerBase(listaBases.get(3)); // Para que funcione provisionalmente, luego quitar esto
 				AbrirPizzaDesdePedido();
 			}
 		});
@@ -103,33 +104,21 @@ public class Controlador
 					for(int i = 0; i < nuevaOrden.getPizzas().size(); i++)
 					{
 						matrizAux[i][0] = nuevaOrden.getPizzas().get(i).getNombre();
-						matrizAux[i][1] = nuevaOrden.getPizzas().get(i).getBase().getTipo();
-						
-						matrizAux[i][2] = nuevaOrden.getPizzas().get(i).getIngredientes().get(0).getNombre() + ", ";
-						for(int j = 1; j < nuevaOrden.getPizzas().get(i).getIngredientes().size(); j++)
-						{
-							matrizAux[i][2] = matrizAux[i][2] + nuevaOrden.getPizzas().get(i).getIngredientes().get(j).getNombre() + ", ";
-							if(nuevaOrden.getPizzas().get(i).getIngredientes().get(j).getGluten() == true)
-							{
-								paraCeliaco = false;
-							}
-						}
-						matrizAux[i][3] = Math.round(nuevaOrden.getPizzas().get(i).calcularCostePizza()*100.0)/100.0 + " euros";
-						matrizAux[i][4] = Math.round(nuevaOrden.calcularCostePedido()*100.0)/100.0 + " euros";
+						matrizAux[i][1] = nuevaOrden.getPizzas().get(i).calcularCostePizza() + " euros";
 					}
 					if(paraCeliaco == true)
 					{
-						concatenar(ventanaPedido.getLabelDesgloseText(), ("Su pedido SI es apto para celiacos\n"));			
+						concatenar(ventanaPedido.getLabelPrecioText(), ("Su pedido SI es apto para celiacos\n"));			
 					}
 					else
 					{
-						concatenar(ventanaPedido.getLabelDesgloseText(), ("Su pedido NO es apto para celiacos\n"));
+						concatenar(ventanaPedido.getLabelPrecioText(), ("Su pedido NO es apto para celiacos\n"));
 					}
 					ventanaPedido.CrearTablaPizzas(matrizAux);
 				}
 				else
 				{
-					ventanaPedido.setLabelDesgloseText("Ninguna pizza encargada");
+					ventanaPedido.setLabelPrecioText("Ninguna pizza encargada");
 				}
 			}
 		});
@@ -171,9 +160,14 @@ public class Controlador
 				{
 					System.out.println("No puede enviar una pizza sin ingredientes");
 				}
+				else if(nuevaPizza.getBase() == null)
+				{
+					System.out.println("No puede enviar una pizza sin elegir tamaño");
+				}
 				else
 				{
-					String nuevoNombre = "Pizza con ";
+					String nuevoNombre = "Pizza ";
+					nuevoNombre = nuevoNombre + nuevaPizza.getBase().getTamanio() + " con ";
 					for(int i = 0; i < nuevaPizza.getIngredientes().size(); i++)
 					{
 						nuevoNombre = nuevoNombre + nuevaPizza.getIngredientes().get(i).getNombre() + " ";
@@ -181,6 +175,8 @@ public class Controlador
 					nuevaPizza.setNombre(nuevoNombre);
 					
 					pizzasCSV.addPizza(nuevaOrden, nuevaPizza);
+					nuevaOrden.aniadirPizza(nuevaPizza);
+					ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
 					AbrirPedidoDesdePizza();
 				}
 			}
@@ -191,6 +187,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(0));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnQueso());
 			}
 		});
 		this.ventanaPizza.getBtnQuesoSinGluten().addActionListener(new ActionListener()
@@ -198,6 +195,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(1));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnQuesoSinGluten());
 			}
 		});
 		this.ventanaPizza.getBtnTomate().addActionListener(new ActionListener()
@@ -205,6 +203,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(2));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnTomate());
 			}
 		});
 		this.ventanaPizza.getBtnChampinones().addActionListener(new ActionListener()
@@ -212,6 +211,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(3));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnChampinones());
 			}
 		});
 		this.ventanaPizza.getBtnBacon().addActionListener(new ActionListener()
@@ -219,6 +219,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(4));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnBacon());
 			}
 		});
 		this.ventanaPizza.getBtnAceitunas().addActionListener(new ActionListener()
@@ -226,6 +227,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(5));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnAceitunas());
 			}
 		});
 		this.ventanaPizza.getBtnAnchoas().addActionListener(new ActionListener()
@@ -233,6 +235,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(6));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnAnchoas());
 			}
 		});
 		this.ventanaPizza.getBtnPimiento().addActionListener(new ActionListener()
@@ -240,6 +243,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(7));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnPimiento());
 			}
 		});
 		this.ventanaPizza.getBtnYork().addActionListener(new ActionListener()
@@ -247,6 +251,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(8));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnYork());
 			}
 		});
 		this.ventanaPizza.getBtnSerrano().addActionListener(new ActionListener()
@@ -254,6 +259,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(9));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnSerrano());
 			}
 		});
 		this.ventanaPizza.getBtnCebolla().addActionListener(new ActionListener()
@@ -261,6 +267,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(10));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnCebolla());
 			}
 		});
 		this.ventanaPizza.getBtnCebollaCaram().addActionListener(new ActionListener()
@@ -268,6 +275,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(11));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnCebollaCaram());
 			}
 		});
 		this.ventanaPizza.getBtnPollo().addActionListener(new ActionListener()
@@ -275,6 +283,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(12));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnPollo());
 			}
 		});
 		this.ventanaPizza.getBtnPepperoni().addActionListener(new ActionListener()
@@ -282,6 +291,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(13));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnPepperoni());
 			}
 		});
 		this.ventanaPizza.getBtnMaiz().addActionListener(new ActionListener()
@@ -289,6 +299,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(14));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnMaiz());
 			}
 		});
 		this.ventanaPizza.getBtnAtun().addActionListener(new ActionListener()
@@ -296,6 +307,7 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(15));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnAtun());
 			}
 		});
 		this.ventanaPizza.getBtnPina().addActionListener(new ActionListener()
@@ -303,6 +315,39 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nuevaPizza.getIngredientes().add(listaIngr.get(16));
+				ventanaPizza.hacerIngredienteAzul(ventanaPizza.getBtnPina());
+			}
+		});
+		this.ventanaPizza.getBtnMasaPequena().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.ponerBase(listaBases.get(0));
+				ventanaPizza.hacerBaseAzul(ventanaPizza.getBtnMasaPequena());
+			}
+		});
+		this.ventanaPizza.getBtnMasaGrande().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.ponerBase(listaBases.get(1));
+				ventanaPizza.hacerBaseAzul(ventanaPizza.getBtnMasaGrande());
+			}
+		});
+		this.ventanaPizza.getBtnMasaPequenaSG().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.ponerBase(listaBases.get(2));
+				ventanaPizza.hacerBaseAzul(ventanaPizza.getBtnMasaPequenaSG());
+			}
+		});
+		this.ventanaPizza.getBtnMasaGrandeSG().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				nuevaPizza.ponerBase(listaBases.get(3));
+				ventanaPizza.hacerBaseAzul(ventanaPizza.getBtnMasaGrandeSG());
 			}
 		});
 	}
@@ -356,48 +401,48 @@ public class Controlador
 	private void IniciarBasesIngredientes()
 	{
 		// --- Elementos del Main de consola, añadidos para probar que funciona el controlador
-		Base baseAux = new Base("Pequena", true, 1.5, "Pequena");
+		Base baseAux = new Base("Pequena", true, 1.5, "pequena");
 		listaBases.add(baseAux);
-		baseAux = new Base("Grande", true, 3.75, "Grande");
+		baseAux = new Base("Grande", true, 3.75, "grande");
 		listaBases.add(baseAux);
-		baseAux = new Base("Pequena sin gluten", true, 2, "Pequena");
+		baseAux = new Base("Pequena sin gluten", true, 2, "pequena");
 		listaBases.add(baseAux);
-		baseAux = new Base("Grande sin gluten", true, 4.5, "Grande");
+		baseAux = new Base("Grande sin gluten", true, 4.5, "grande");
 		listaBases.add(baseAux);
 		
-		Ingrediente ingrAux = new Ingrediente("Queso", true, 0.6);
+		Ingrediente ingrAux = new Ingrediente("queso", true, 0.6);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Queso sin gluten", false, 0.9);
+		ingrAux = new Ingrediente("queso sin gluten", false, 0.9);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Tomate", false, 0.65);
+		ingrAux = new Ingrediente("tomate", false, 0.65);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Champinones", true, 0.75);
+		ingrAux = new Ingrediente("champinones", true, 0.75);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Bacon", true, 1.25);
+		ingrAux = new Ingrediente("bacon", true, 1.25);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Aceitunas", true, 1.25);
+		ingrAux = new Ingrediente("aceitunas", true, 1.25);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Anchoas", false, 0.5);
+		ingrAux = new Ingrediente("anchoas", false, 0.5);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Pimiento", false, 0.6);
+		ingrAux = new Ingrediente("pimiento", false, 0.6);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("York", true, 0.75);
+		ingrAux = new Ingrediente("york", true, 0.75);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Serrano", true, 1.2);
+		ingrAux = new Ingrediente("serrano", true, 1.2);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Cebolla", false, 0.3);
+		ingrAux = new Ingrediente("cebolla", false, 0.3);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Cebolla caramelizada", false, 0.6);
+		ingrAux = new Ingrediente("cebolla caramelizada", false, 0.6);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Pollo", false, 0.45);
+		ingrAux = new Ingrediente("pollo", false, 0.45);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Pepperoni", true, 0.85);
+		ingrAux = new Ingrediente("pepperoni", true, 0.85);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Maiz", true, 0.3);
+		ingrAux = new Ingrediente("maiz", true, 0.3);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Atun", false, 0.65);
+		ingrAux = new Ingrediente("atun", false, 0.65);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("Pina", false, 0.8);
+		ingrAux = new Ingrediente("pina", false, 0.8);
 		listaIngr.add(ingrAux);
 	}
 }
