@@ -2,7 +2,7 @@ package mvc;
 
 import javax.swing.JFrame;
 
-public class Main extends JFrame
+public class Main extends JFrame // Comentario
 {
 	static VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 	static VentanaPedido ventanaPedido = new VentanaPedido();
