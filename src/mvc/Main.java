@@ -8,6 +8,7 @@ public class Main extends JFrame
 	static VentanaPedido ventanaPedido = new VentanaPedido();
 	static VentanaPizza ventanaPizza = new VentanaPizza();
 	static VentanaHistorial ventanaHistorial = new VentanaHistorial();
+	static VentanaConfirmar ventanaConfirmar = new VentanaConfirmar();
 	
 	public Main()
 	{
@@ -19,6 +20,7 @@ public class Main extends JFrame
 		Controlador controlador = new Controlador(ventanaPrincipal,
 													ventanaPedido,
 													ventanaPizza,
-													ventanaHistorial);
+													ventanaHistorial,
+													ventanaConfirmar);
 	}
 }

@@ -4,13 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Orden;
 
@@ -24,9 +27,9 @@ public class VentanaPedido extends JFrame
 	private JButton btnCancelarPedido;
 	
 	private JPanel contentPane;
-	private JPanel paneTabla;
 	
 	private JLabel labelPrecio;
+	private JLabel labelCeliaco;
 	
 	private JTable tablaPizzas = new JTable();
 
@@ -39,16 +42,10 @@ public class VentanaPedido extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(250, 100, 700, 600);
 		
-		paneTabla = new JPanel();
-		paneTabla.setBounds(12, 270, 408, 100);
-		paneTabla.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(paneTabla);
-		paneTabla.setLayout(new BorderLayout());
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout());
+		contentPane.setLayout(null);
 		
 		btnAniadirPizza = new JButton("Añadir pizza");
 		btnAniadirPizza.setBounds(12, 30, 408, 25);
@@ -78,12 +75,23 @@ public class VentanaPedido extends JFrame
 		contentPane.add(btnCancelarPedido);
 				
 		labelPrecio = new JLabel();
-		labelPrecio.setText("Hola");
-		labelPrecio.setBounds(12, 190, 408, 100);
+		labelPrecio.setBounds(12, 230, 408, 25);
 		contentPane.add(labelPrecio);
+		
+		labelCeliaco = new JLabel();
+		labelCeliaco.setText("Su pedido SÍ es apto para celiacos");
+		labelCeliaco.setBounds(12, 250, 408, 25);
+		contentPane.add(labelCeliaco);
+		
+		/*String[] nombreColumnas = {"Descripción", "Precio"};
+		String[][] datos = {{null, null}};
+		tablaPizzas.setBackground(null);
+		tablaPizzas = new JTable(datos, nombreColumnas);
+		tablaPizzas.setBounds(12, 290, 408, 100);
+		contentPane.add(tablaPizzas);*/
 	}
 	
-	public void ActivarBuilder()
+	/*public void ActivarBuilder()
 	{
 		EventQueue.invokeLater(new Runnable()
 		{
@@ -97,15 +105,23 @@ public class VentanaPedido extends JFrame
 				catch (Exception e) { e.printStackTrace(); }
 			}
 		});
-	}
+	}*/
 	
 	public void CrearTablaPizzas(String[][] datos)
 	{
-		String[] nombreColumnas = {"Descripción", "Precio"};
-		tablaPizzas = new JTable(datos, nombreColumnas);
-		contentPane.add(contentPane);
-		tablaPizzas.setAutoResizeMode(tablaPizzas.AUTO_RESIZE_OFF);
-		tablaPizzas.setPreferredScrollableViewportSize(new Dimension(408, 100));
+		String[] nombreColumnas = {"Descripción", "Precio"};				
+		tablaPizzas = new JTable(datos, nombreColumnas);		
+		contentPane.add(tablaPizzas);
+		tablaPizzas.setBackground(null);
+		tablaPizzas.setBounds(12, 290, 408, 100);
+		tablaPizzas.getColumn(0).setMinWidth(100);
+		tablaPizzas.getColumn(1).setMinWidth(100);
+	}
+	
+	public void resetear()
+	{
+		btnEliminarPizza.setText("EliminarPizza");
+		btnVerPedido.setText("Ver pedido");
 	}
 	
 	// Getters/Setters

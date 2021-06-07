@@ -1,6 +1,5 @@
 package mvc;
 
-//import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -33,7 +32,7 @@ public class VentanaPrincipal extends JFrame
 		btnNuevoPedido.setBounds(12, 30, 408, 25);
 		contentPane.add(btnNuevoPedido);
 		
-		btnConfirmarPedido = new JButton("Confirmar pedido");
+		btnConfirmarPedido = new JButton("Confirmar entrega");
 		btnConfirmarPedido.setBounds(12, 70, 408, 25);
 		contentPane.add(btnConfirmarPedido);
 		

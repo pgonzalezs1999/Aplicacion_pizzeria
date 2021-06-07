@@ -24,12 +24,14 @@ public class Controlador
 	VentanaPedido ventanaPedido;
 	VentanaPizza ventanaPizza;
 	VentanaHistorial ventanaHistorial;
+	VentanaConfirmar ventanaConfirmar;
 	
 	// Constructor
 	public Controlador(VentanaPrincipal ventanaPrincipal,
 						VentanaPedido ventanaPedido,
 						VentanaPizza ventanaPizza,
-						VentanaHistorial ventanaHistorial)
+						VentanaHistorial ventanaHistorial,
+						VentanaConfirmar ventanaConfirmar)
 	{
 		IniciarBasesIngredientes();
 		
@@ -37,11 +39,13 @@ public class Controlador
 		this.ventanaPedido = ventanaPedido;
 		this.ventanaPizza = ventanaPizza;
 		this.ventanaHistorial = ventanaHistorial;
+		this.ventanaConfirmar = ventanaConfirmar;
 		
 		this.crearListenersVentanaPrincipal();
 		this.crearListenersVentanaPedido();
 		this.crearListenersVentanaPizza();
 		this.crearListenersVentanaHistorial();
+		this.crearListenersVentanaConfirmar();
 		
 		this.ventanaPrincipal.setVisible(true);
 		
@@ -68,6 +72,14 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				AbrirHistorialDesdePrincipal();
+			}
+		});
+		
+		this.ventanaPrincipal.getBtnConfirmarPedido().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				AbrirConfirmarDesdePrincipal();
 			}
 		});
 	}
@@ -118,7 +130,7 @@ public class Controlador
 				}
 				else
 				{
-					ventanaPedido.setLabelPrecioText("Ninguna pizza encargada");
+					ventanaPedido.getBtnVerPedido().setText("Ninguna pizza encargada");
 				}
 			}
 		});
@@ -362,6 +374,24 @@ public class Controlador
 			}
 		});
 	}
+	private void crearListenersVentanaConfirmar()
+	{
+		//---- Listeners Ventana Historial ----//
+		this.ventanaConfirmar.getBtnVolver().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				AbrirPrincipalDesdeConfirmar();
+			}
+		});
+		this.ventanaConfirmar.getBtnEnviar().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				System.out.println(ventanaConfirmar.getScannerText());
+			}
+		});
+	}
 	
 	private void AbrirHistorialDesdePrincipal()
 	{
@@ -377,6 +407,7 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPrincipal.setVisible(false);
+		this.ventanaPedido.resetear();
 		nuevaOrden = new Orden();
 	}
 	private void AbrirPrincipalDesdePedido()
@@ -393,7 +424,21 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPizza.setVisible(false);
+		this.ventanaPedido.resetear();
 	}
+	private void AbrirConfirmarDesdePrincipal()
+	{
+		this.ventanaConfirmar.setVisible(true);
+		this.ventanaPrincipal.setVisible(false);
+		nuevaOrden = new Orden();
+	}
+	private void AbrirPrincipalDesdeConfirmar()
+	{
+		this.ventanaPrincipal.setVisible(true);
+		this.ventanaConfirmar.setVisible(false);
+		nuevaOrden = new Orden();
+	}
+	
 	public void concatenar(String original, String extra)
 	{
 		original = original + "" + extra; 
