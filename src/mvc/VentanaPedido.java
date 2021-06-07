@@ -83,7 +83,7 @@ public class VentanaPedido extends JFrame
 		labelCeliaco.setBounds(12, 250, 408, 25);
 		contentPane.add(labelCeliaco);
 		
-		/*String[] nombreColumnas = {"Descripción", "Precio"};
+		/*String[] nombreColumnas = {"Descripción", "Precio"}; 
 		String[][] datos = {{null, null}};
 		tablaPizzas.setBackground(null);
 		tablaPizzas = new JTable(datos, nombreColumnas);
