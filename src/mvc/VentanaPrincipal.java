@@ -3,6 +3,7 @@ package mvc;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -14,6 +15,10 @@ public class VentanaPrincipal extends JFrame
 	private JButton btnNuevoPedido;
 	private JButton btnConfirmarPedido;
 	private JButton btnVerHistorial;
+	
+	private JLabel labelAreaClientes;
+	private JLabel labelAreaTrabajadores;
+	private JLabel labelPedidoEnviado;
 	
 	/**
 	 * Create the frame.
@@ -29,32 +34,32 @@ public class VentanaPrincipal extends JFrame
 		contentPane.setLayout(null);
 		
 		btnNuevoPedido = new JButton("Nuevo pedido");
-		btnNuevoPedido.setBounds(12, 30, 408, 25);
+		btnNuevoPedido.setBounds(12, 60, 408, 25);
 		contentPane.add(btnNuevoPedido);
 		
 		btnConfirmarPedido = new JButton("Confirmar entrega");
-		btnConfirmarPedido.setBounds(12, 70, 408, 25);
+		btnConfirmarPedido.setBounds(12, 210, 408, 25);
 		contentPane.add(btnConfirmarPedido);
 		
 		btnVerHistorial = new JButton("Ver historial de pedidos");
-		btnVerHistorial.setBounds(12, 110, 408, 25);
+		btnVerHistorial.setBounds(12, 170, 408, 25);
 		contentPane.add(btnVerHistorial);
-	}
-	
-	public void ActivarBuilder()
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					VentanaPedido frame = new VentanaPedido();
-					frame.setVisible(true);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-			}
-		});
+		
+		labelPedidoEnviado = new JLabel();
+		labelPedidoEnviado.setText("¡Su pedido se ha enviado correctamente! Llegará en unos 25 minutos");
+		labelPedidoEnviado.setVisible(false);
+		labelPedidoEnviado.setBounds(12, 90, 408, 25);
+		contentPane.add(labelPedidoEnviado);
+		
+		labelAreaClientes = new JLabel();
+		labelAreaClientes.setText("Área clientes:");
+		labelAreaClientes.setBounds(12, 30, 408, 25);
+		contentPane.add(labelAreaClientes);
+		
+		labelAreaTrabajadores = new JLabel();
+		labelAreaTrabajadores.setText("Área trabajadores:");
+		labelAreaTrabajadores.setBounds(12, 140, 408, 25);
+		contentPane.add(labelAreaTrabajadores);
 	}
 
 	// Getters/Setters
@@ -69,5 +74,9 @@ public class VentanaPrincipal extends JFrame
 	public JButton getBtnVerHistorial()
 	{
 		return btnVerHistorial;
+	}
+	public JLabel getLabelPedidoEnviado()
+	{
+		return labelPedidoEnviado;
 	}
 }

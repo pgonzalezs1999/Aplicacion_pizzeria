@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Date;
 //import java.util.Date;
 import java.util.Vector;
 
@@ -11,7 +12,7 @@ public class Orden
 	//private String nombre;
 	//private String direccion;
 	//private int telefono;
-	//private Date fecha_pedido;
+	private Date fecha_pedido;
 	private Vector<Pizza> pizzas = new Vector<Pizza>();
 	private boolean entregado;
 	
@@ -34,11 +35,6 @@ public class Orden
 			if(pizzas.isEmpty() == false)
 			{
 				pizzas.remove(pizzas.lastElement());
-				System.out.println("Pizza eliminada correctamente\n");
-			}
-			else
-			{
-				System.out.println("No hay ninguna pizza que eliminar\n");
 			}
 		}
 		catch(Exception e)

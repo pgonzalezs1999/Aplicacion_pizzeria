@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.JLabel;
+
 import ficheros.EditarCSV;
 import modelo.Base;
 import modelo.Ingrediente;
@@ -11,15 +13,19 @@ import modelo.Pizza;
 
 public class Controlador
 {
+	// Declarar los tipos de base e ingrediente que ofrecemos y sus propiedades
 	Vector<Base> listaBases = new Vector<Base>();
 	Vector<Ingrediente> listaIngr = new Vector<Ingrediente>();
 	
+	// La orden y la pizza que van a almacenar los datos hasta grabarlos en el CSV
 	private Orden nuevaOrden;
 	private Pizza nuevaPizza;
+	
+	// Instancias del editor que trabajarán sobre el CSV de pizzas y de pedidos
 	private EditarCSV pizzasCSV = new EditarCSV("pizzas.csv");
 	private EditarCSV pedidosCSV = new EditarCSV("pedidos.csv");
 	
-	// Atributos MVC	
+	// Ventanas	
 	VentanaPrincipal ventanaPrincipal;
 	VentanaPedido ventanaPedido;
 	VentanaPizza ventanaPizza;
@@ -33,31 +39,34 @@ public class Controlador
 						VentanaHistorial ventanaHistorial,
 						VentanaConfirmar ventanaConfirmar)
 	{
-		IniciarBasesIngredientes();
+		IniciarBasesIngredientes(); // Funcion con la que generamos a mano cada base e ingrediente
 		
+		// Guardar en esta clase las ventanas del main
 		this.ventanaPrincipal = ventanaPrincipal;
 		this.ventanaPedido = ventanaPedido;
 		this.ventanaPizza = ventanaPizza;
 		this.ventanaHistorial = ventanaHistorial;
 		this.ventanaConfirmar = ventanaConfirmar;
 		
+		// Cada ventana tiene su propia funcion de listeners tener el codigo algo mas ordenado
 		this.crearListenersVentanaPrincipal();
 		this.crearListenersVentanaPedido();
 		this.crearListenersVentanaPizza();
 		this.crearListenersVentanaHistorial();
 		this.crearListenersVentanaConfirmar();
 		
-		this.ventanaPrincipal.setVisible(true);
+		this.ventanaPrincipal.setVisible(true); // La que abrirá por defecto el programa
 		
+		// Funciones para recibir datos de los CSV y dejarlos listos para trabajar con ellos
 		pizzasCSV.cargarCSV();
 		pedidosCSV.cargarCSV();
 		
 		nuevaPizza = new Pizza();
+		nuevaOrden = new Orden();
 	}
 	
-	private void crearListenersVentanaPrincipal()
-	{
-		//---- Listeners VentanaPrincipal ----//
+	private void crearListenersVentanaPrincipal() //---- Listeners de VentanaPrincipal ----//
+	{		
 		this.ventanaPrincipal.getBtnNuevoPedido().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -80,19 +89,19 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				AbrirConfirmarDesdePrincipal();
+				resetearVentanaConfirmar();
+				AbrirConfirmarDesdePrincipal();			
 			}
 		});
 	}
-	private void crearListenersVentanaPedido()
+	private void crearListenersVentanaPedido() //---- Listeners de Ventana Pedidos ----//
 	{
-		//---- Listeners Ventana Pedidos ----//
 		this.ventanaPedido.getBtnAniadirPizza().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
 				System.out.println(nuevaOrden.getID());
-				ventanaPizza.resetearVentana();
+				resetearVentanaPizza();
 				nuevaPizza = new Pizza();
 				AbrirPizzaDesdePedido();
 			}
@@ -102,8 +111,18 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				pizzasCSV.eliminarUltimaPizza(nuevaOrden);
-				nuevaOrden.eliminarUltimaPizza();
+				resetearVentanaPedido();
+
+				if(nuevaOrden.getPizzas().isEmpty() == true)
+				{
+					ventanaPedido.getBtnEliminarPizza().setText("No hay ninguna pizza que eliminar");
+				}
+				else
+				{
+					pizzasCSV.eliminarUltimaPizza(nuevaOrden);
+					nuevaOrden.eliminarUltimaPizza();
+					resetearVentanaPedido();				
+				}
 			}
 		});
 		
@@ -111,6 +130,8 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				resetearVentanaPedido();
+
 				if(nuevaOrden.getPizzas().isEmpty() == false)
 				{
 					String[][] matrizAux = new String[nuevaOrden.getPizzas().size()][5];
@@ -142,14 +163,16 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				resetearVentanaPedido();
+
 				if(nuevaOrden.getPizzas().isEmpty() == false)
 				{
-					System.out.println("Enviando pedido... Llegara en unos 25 minutos");
-					System.out.println("El coste de su pedido es: " + nuevaOrden.calcularCostePedido() + "â‚¬");
+					AbrirPrincipalDesdePedido();
+					ventanaPrincipal.getLabelPedidoEnviado().setVisible(true);
 				}
 				else
 				{
-					System.out.println("No emitimos pedidos vacios");
+					ventanaPedido.getBtnEnviarPedido().setText("No emitimos pedidos vacíos");
 				}
 			}
 		});
@@ -158,26 +181,25 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				nuevaOrden.aniadirPizza(nuevaPizza);
+				pizzasCSV.cancelarOrden(nuevaOrden);
 				
 				AbrirPrincipalDesdePedido();
 			}
 		});
 	}
-	private void crearListenersVentanaPizza()
-	{
-		//---- Listeners Ventana Historial ----//
+	private void crearListenersVentanaPizza() //---- Listeners de Ventana Historial ----//
+	{	
 		this.ventanaPizza.getBtnEnviarPizza().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if(nuevaPizza.getIngredientes().size() == 0)
+				if(nuevaPizza.getBase() == null)
 				{
-					System.out.println("No puede enviar una pizza sin ingredientes");
+					ventanaPizza.getBtnEnviarPizza().setText("No puede enviar una pizza sin elegir tamaño");
 				}
-				else if(nuevaPizza.getBase() == null)
+				else if(nuevaPizza.getIngredientes().size() == 0)
 				{
-					System.out.println("No puede enviar una pizza sin elegir tamaño");
+					ventanaPizza.getBtnEnviarPizza().setText("No puede enviar una pizza sin ingredientes");
 				}
 				else
 				{
@@ -366,9 +388,8 @@ public class Controlador
 			}
 		});
 	}
-	private void crearListenersVentanaHistorial()
-	{
-		//---- Listeners Ventana Historial ----//
+	private void crearListenersVentanaHistorial() //---- Listeners Ventana Historial ----//
+	{		
 		this.ventanaHistorial.getBtnVolver().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -377,9 +398,8 @@ public class Controlador
 			}
 		});
 	}
-	private void crearListenersVentanaConfirmar()
-	{
-		//---- Listeners Ventana Historial ----//
+	private void crearListenersVentanaConfirmar() //---- Listeners Ventana Confirmar ----//
+	{		
 		this.ventanaConfirmar.getBtnVolver().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -387,11 +407,23 @@ public class Controlador
 				AbrirPrincipalDesdeConfirmar();
 			}
 		});
-		this.ventanaConfirmar.getBtnEnviar().addActionListener(new ActionListener()
+		this.ventanaConfirmar.getBtnConfirmar().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				System.out.println(ventanaConfirmar.getScannerText());
+				try
+				{
+					int idConfirmar = Integer.parseInt(ventanaConfirmar.getScannerText()) - 1;
+					if(idConfirmar > 0 && idConfirmar < pedidosCSV.contarLineasFichero())
+					{
+						pedidosCSV.modificarDato(idConfirmar, 3, "1");						
+					}
+				}
+				catch(Exception e)
+				{
+					ventanaConfirmar.setInstruccionesText("Introduzca un número válido:");
+				}
+				resetearVentanaConfirmar();
 			}
 		});
 	}
@@ -410,7 +442,7 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPrincipal.setVisible(false);
-		this.ventanaPedido.resetear();
+		resetearVentanaPedido();
 		nuevaOrden = new Orden();
 	}
 	private void AbrirPrincipalDesdePedido()
@@ -427,7 +459,7 @@ public class Controlador
 	{
 		this.ventanaPedido.setVisible(true);
 		this.ventanaPizza.setVisible(false);
-		this.ventanaPedido.resetear();
+		resetearVentanaPedido();
 	}
 	private void AbrirConfirmarDesdePrincipal()
 	{
@@ -442,20 +474,100 @@ public class Controlador
 		nuevaOrden = new Orden();
 	}
 	
+	public void resetearVentanaPrincipal()
+	{
+		
+	}
+	public void resetearVentanaPedido()
+	{
+		if(nuevaOrden.getPizzas().size() != 0)
+		{
+			boolean aptaCeliacos = true;
+			for(int i = 0; i < nuevaOrden.getPizzas().size(); i++)
+			{
+				if(nuevaOrden.getPizzas().get(i).aptaCeliacos() == false)
+				{
+					aptaCeliacos = false;
+				}
+			}
+			if(aptaCeliacos == true)
+			{
+				ventanaPedido.setLabelCeliaco("Su pedido SÍ es apto para celiacos");
+			}
+			else
+			{
+				ventanaPedido.setLabelCeliaco("Su pedido NO es apto para celiacos");
+			}
+		}
+		ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
+		ventanaPedido.getBtnEliminarPizza().setText("Eliminar última pizza");
+		ventanaPedido.getBtnVerPedido().setText("Ver pedido");
+		ventanaPedido.getBtnEnviarPedido().setText("EnviarPedido");
+		
+	}
+	public void resetearVentanaPizza()
+	{
+		ventanaPizza.getBtnMasaPequena().setBackground(null);
+		ventanaPizza.getBtnMasaGrande().setBackground(null);
+		ventanaPizza.getBtnMasaPequenaSG().setBackground(null);
+		ventanaPizza.getBtnMasaGrandeSG().setBackground(null);
+		ventanaPizza.getBtnQueso().setBackground(null);
+		ventanaPizza.getBtnQuesoSinGluten().setBackground(null);
+		ventanaPizza.getBtnTomate().setBackground(null);
+		ventanaPizza.getBtnChampinones().setBackground(null);
+		ventanaPizza.getBtnBacon().setBackground(null);
+		ventanaPizza.getBtnAceitunas().setBackground(null);
+		ventanaPizza.getBtnAnchoas().setBackground(null);
+		ventanaPizza.getBtnPimiento().setBackground(null);
+		ventanaPizza.getBtnYork().setBackground(null);
+		ventanaPizza.getBtnSerrano().setBackground(null);
+		ventanaPizza.getBtnCebolla().setBackground(null);
+		ventanaPizza.getBtnCebollaCaram().setBackground(null);
+		ventanaPizza.getBtnPollo().setBackground(null);
+		ventanaPizza.getBtnPepperoni().setBackground(null);
+		ventanaPizza.getBtnMaiz().setBackground(null);
+		ventanaPizza.getBtnAtun().setBackground(null);
+		ventanaPizza.getBtnPina().setBackground(null);
+		ventanaPizza.getBtnEnviarPizza().setText("Enviar pizza");
+	}
+	public void resetearVentanaHistorial()
+	{
+
+	}
+	public void resetearVentanaConfirmar()
+	{
+		Vector<String> pedidos = pedidosCSV.pedidosSinConfirmar();
+		if(pedidos.isEmpty() == false)
+		{
+			int posXPedido = 12;
+			int posXPizza = 20;
+			int posYactual = 130;
+			int separacion = 30;
+			String nuevoTexto;
+			
+			for(int i = 0; i < pedidos.size(); i++)
+			{
+				nuevoTexto = "ID del pedido: " + pedidos.get(i) + ". Encargado el " + "";
+				ventanaConfirmar.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
+				posYactual += 30;
+			}
+		}
+		ventanaConfirmar.setInstruccionesText("Introduzca el ID del pedido que desea confirmar");
+	}
+	
 	public void concatenar(String original, String extra)
 	{
 		original = original + "" + extra; 
 	}
-	private void IniciarBasesIngredientes()
+	private void IniciarBasesIngredientes() // Funcion con la que generamos a mano cada base e ingrediente
 	{
-		// --- Elementos del Main de consola, añadidos para probar que funciona el controlador
 		Base baseAux = new Base("Pequena", true, 1.5, "pequena");
 		listaBases.add(baseAux);
 		baseAux = new Base("Grande", true, 3.75, "grande");
 		listaBases.add(baseAux);
-		baseAux = new Base("Pequena sin gluten", true, 2, "pequena");
+		baseAux = new Base("Pequena sin gluten", false, 2, "pequena");
 		listaBases.add(baseAux);
-		baseAux = new Base("Grande sin gluten", true, 4.5, "grande");
+		baseAux = new Base("Grande sin gluten", false, 4.5, "grande");
 		listaBases.add(baseAux);
 		
 		Ingrediente ingrAux = new Ingrediente("queso", true, 0.6);
@@ -468,7 +580,7 @@ public class Controlador
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("bacon", true, 1.25);
 		listaIngr.add(ingrAux);
-		ingrAux = new Ingrediente("aceitunas", true, 1.25);
+		ingrAux = new Ingrediente("aceitunas", true, 0.55);
 		listaIngr.add(ingrAux);
 		ingrAux = new Ingrediente("anchoas", false, 0.5);
 		listaIngr.add(ingrAux);

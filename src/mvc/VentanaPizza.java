@@ -68,71 +68,71 @@ public class VentanaPizza extends JFrame
 		btnEnviarPizza.setBackground(verdeSuave);
 		contentPane.add(btnEnviarPizza);
 		
-		btnQueso = new JButton("Queso");
+		btnQueso = new JButton("Queso (0.60€)");
 		btnQueso.setBounds(12, 150, 300, 25);
 		contentPane.add(btnQueso);
 		
-		btnQuesoSinGluten = new JButton("Queso sin glúten");
+		btnQuesoSinGluten = new JButton("Queso sin glúten (0.90€)");
 		btnQuesoSinGluten.setBounds(12, 190, 300, 25);
 		contentPane.add(btnQuesoSinGluten);
 		
-		btnTomate = new JButton("Tomate");
+		btnTomate = new JButton("Tomate (0.65€)");
 		btnTomate.setBounds(12, 230, 300, 25);
 		contentPane.add(btnTomate);
 		
-		btnChampinones = new JButton("Champiñones");
+		btnChampinones = new JButton("Champiñones (0.75€)");
 		btnChampinones.setBounds(12, 270, 300, 25);
 		contentPane.add(btnChampinones);
 		
-		btnBacon = new JButton("Bacon");
+		btnBacon = new JButton("Bacon (1.25€)");
 		btnBacon.setBounds(12, 310, 300, 25);
 		contentPane.add(btnBacon);
 		
-		btnAceitunas = new JButton("Aceitunas");
+		btnAceitunas = new JButton("Aceitunas (0.55€)");
 		btnAceitunas.setBounds(12, 350, 300, 25);
 		contentPane.add(btnAceitunas);
 		
-		btnAnchoas = new JButton("Anchoas");
+		btnAnchoas = new JButton("Anchoas (0.50€)");
 		btnAnchoas.setBounds(12, 390, 300, 25);
 		contentPane.add(btnAnchoas);
 		
-		btnPimiento = new JButton("Pimiento");
+		btnPimiento = new JButton("Pimiento (0.60€)");
 		btnPimiento.setBounds(12, 430, 300, 25);
 		contentPane.add(btnPimiento);
 		
-		btnYork = new JButton("York");
+		btnYork = new JButton("York (0.75€)");
 		btnYork.setBounds(12, 470, 300, 25);
 		contentPane.add(btnYork);
 		
-		btnSerrano = new JButton("Serrano");
+		btnSerrano = new JButton("Serrano (1.20€)");
 		btnSerrano.setBounds(350, 150, 300, 25);
 		contentPane.add(btnSerrano);
 		
-		btnCebolla = new JButton("Cebolla");
+		btnCebolla = new JButton("Cebolla (0.30€)");
 		btnCebolla.setBounds(350, 190, 300, 25);
 		contentPane.add(btnCebolla);
 		
-		btnCebollaCaram = new JButton("Cebolla caramelizada");
+		btnCebollaCaram = new JButton("Cebolla caramelizada (0.60€)");
 		btnCebollaCaram.setBounds(350, 230, 300, 25);
 		contentPane.add(btnCebollaCaram);
 		
-		btnPollo = new JButton("Pollo");
+		btnPollo = new JButton("Pollo (0.45€)");
 		btnPollo.setBounds(350, 270, 300, 25);
 		contentPane.add(btnPollo);
 		
-		btnPepperoni = new JButton("Pepperoni");
+		btnPepperoni = new JButton("Pepperoni (0.85€)");
 		btnPepperoni.setBounds(350, 310, 300, 25);
 		contentPane.add(btnPepperoni);
 		
-		btnMaiz = new JButton("Maiz");
+		btnMaiz = new JButton("Maiz (0.30€)");
 		btnMaiz.setBounds(350, 350, 300, 25);
 		contentPane.add(btnMaiz);
 		
-		btnAtun = new JButton("Atún");
+		btnAtun = new JButton("Atún (0.65€)");
 		btnAtun.setBounds(350, 390, 300, 25);
 		contentPane.add(btnAtun);
 		
-		btnPina = new JButton("Piña");
+		btnPina = new JButton("Piña (0.80€)");
 		btnPina.setBounds(350, 430, 300, 25);
 		contentPane.add(btnPina);
 		
@@ -165,27 +165,6 @@ public class VentanaPizza extends JFrame
 	public void hacerIngredienteAzul(JButton botonElegido)
 	{
 		botonElegido.setBackground(azulSuave);
-	}
-	
-	public void resetearVentana()
-	{
-		btnQueso.setBackground(null);
-		btnQuesoSinGluten.setBackground(null);
-		btnTomate.setBackground(null);
-		btnChampinones.setBackground(null);
-		btnBacon.setBackground(null);
-		btnAceitunas.setBackground(null);
-		btnAnchoas.setBackground(null);
-		btnPimiento.setBackground(null);
-		btnYork.setBackground(null);
-		btnSerrano.setBackground(null);
-		btnCebolla.setBackground(null);
-		btnCebollaCaram.setBackground(null);
-		btnPollo.setBackground(null);
-		btnPepperoni.setBackground(null);
-		btnMaiz.setBackground(null);
-		btnAtun.setBackground(null);
-		btnPina.setBackground(null);
 	}
 	
 	// Getters/Setters

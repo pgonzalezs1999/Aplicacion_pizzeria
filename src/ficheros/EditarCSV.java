@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Vector;
 
 import modelo.Orden;
 import modelo.Pizza;
@@ -86,6 +87,12 @@ public class EditarCSV
 			System.out.println("ERROR ESCRITURA FICHERO: " + e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public void modificarDato(int fila, int columna, String nuevoValor)
+	{
+		datos[fila][columna] = nuevoValor;
+		guardarCSV();
 	}
 
 	public void addPizza(Orden orden, Pizza pizza) // Introduce una fila en la posición orden
@@ -169,6 +176,33 @@ public class EditarCSV
 			{
 				delFila(i);
 				eliminada = true;
+			}
+		}
+	}
+	
+	public Vector<String> pedidosSinConfirmar() // Devuelve los ID necesarios para buscarlos en el otro CSV
+	{
+		Vector<String> pedidos = new Vector<String>();
+		
+		for(int i = 0; i < datos.length; i++)
+		{
+			if(datos[i][3].equals("0"))
+			{
+				pedidos.add(datos[i][0]);
+			}
+		}
+		
+		return pedidos;
+	}
+	
+	public void cancelarOrden(Orden nuevaOrden)
+	{
+		for(int i = 0; i < datos.length; i++)
+		{
+			if(datos[i][0].equals(String.valueOf(nuevaOrden.getID())) == true)
+			{
+				delFila(i);
+				i--;
 			}
 		}
 	}

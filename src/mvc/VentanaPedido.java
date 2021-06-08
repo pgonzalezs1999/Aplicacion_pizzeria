@@ -1,21 +1,13 @@
 package mvc;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import modelo.Orden;
 
 public class VentanaPedido extends JFrame
 {
@@ -97,22 +89,6 @@ public class VentanaPedido extends JFrame
 		contentPane.add(tablaPizzas);*/
 	}
 	
-	/*public void ActivarBuilder()
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					VentanaPedido frame = new VentanaPedido();
-					frame.setVisible(true);
-				}
-				catch (Exception e) { e.printStackTrace(); }
-			}
-		});
-	}*/
-	
 	public void CrearTablaPizzas(String[][] datos)
 	{
 		String[] nombreColumnas = {"Descripción", "Precio"};				
@@ -124,13 +100,11 @@ public class VentanaPedido extends JFrame
 		tablaPizzas.getColumn(1).setMinWidth(100);
 	}
 	
-	public void resetear()
-	{
-		btnEliminarPizza.setText("Eliminar última pizza");
-		btnVerPedido.setText("Ver pedido");
-	}
-	
 	// Getters/Setters
+	public void setLabelCeliaco(String nuevoTexto)
+	{
+		labelCeliaco.setText(nuevoTexto);
+	}	
 	public void setLabelPrecioText(String nuevoTexto)
 	{
 		labelPrecio.setText(nuevoTexto);

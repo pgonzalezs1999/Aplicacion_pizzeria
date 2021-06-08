@@ -1,12 +1,11 @@
 package mvc;
 
-import java.awt.EventQueue;
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 
 public class VentanaConfirmar extends JFrame
 {
@@ -14,44 +13,63 @@ public class VentanaConfirmar extends JFrame
 	private JPanel contentPane;
 	
 	private JButton btnVolver;
-	private JButton btnEnviar;
+	private JButton btnConfirmar;
 	
 	private JTextField scanner;
+	
+	private JLabel labelInstrucciones;
 		
 	public VentanaConfirmar()
 	{
 		setTitle("Ventana Principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(250, 100, 700, 600);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnVolver = new JButton("Volver al menú");
-		btnVolver.setBounds(12, 30, 408, 25);
+		btnVolver.setBounds(12, 100, 408, 25);
 		contentPane.add(btnVolver);
 		
-		btnEnviar = new JButton("Confirmar entrega");
-		btnEnviar.setBounds(12, 70, 408, 25);
-		contentPane.add(btnEnviar);
+		btnConfirmar = new JButton("Confirmar entrega");
+		btnConfirmar.setBounds(260, 60, 160, 25);
+		contentPane.add(btnConfirmar);
 		
 		scanner = new JTextField();
-		scanner.setBounds(12, 150, 408, 25);
+		scanner.setBounds(12, 60, 230, 25);
 		contentPane.add(scanner);
+		
+		labelInstrucciones = new JLabel();
+		labelInstrucciones.setText("Introduce el ID del pedido que desea confirmar:");
+		labelInstrucciones.setBounds(12, 30, 408, 25);
+		contentPane.add(labelInstrucciones);
+	}
+	
+	public void crearLabel(int posX, int posY, int ancho, int alto, String texto)
+	{
+		JLabel labelAux = new JLabel();
+		labelAux.setBounds(posX, posY, ancho, alto);
+		labelAux.setText(texto);
+		contentPane.add(labelAux);
 	}
 	
 	public JButton getBtnVolver()
 	{
 		return this.btnVolver;
-	}
-	
-	public JButton getBtnEnviar()
+	}	
+	public JButton getBtnConfirmar()
 	{
-		return this.btnEnviar;
+		return this.btnConfirmar;
 	}
 	public String getScannerText()
 	{
 		return this.scanner.getText();
+	}
+	public void setInstruccionesText(String nuevoTexto)
+	{
+		this.labelInstrucciones.setText(nuevoTexto);
 	}
 }
