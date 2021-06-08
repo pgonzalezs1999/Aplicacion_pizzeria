@@ -30,6 +30,7 @@ public class VentanaPedido extends JFrame
 	
 	private JLabel labelPrecio;
 	private JLabel labelCeliaco;
+	private JLabel labelID;
 	
 	private JTable tablaPizzas = new JTable();
 
@@ -52,7 +53,7 @@ public class VentanaPedido extends JFrame
 		btnAniadirPizza.setAlignmentX(CENTER_ALIGNMENT);
 		contentPane.add(btnAniadirPizza);
 		
-		btnEliminarPizza = new JButton("Eliminar pizza");
+		btnEliminarPizza = new JButton("Eliminar última pizza");
 		btnEliminarPizza.setBounds(12, 70, 408, 25);
 		btnEliminarPizza.setAlignmentX(CENTER_ALIGNMENT);
 		contentPane.add(btnEliminarPizza);
@@ -83,11 +84,16 @@ public class VentanaPedido extends JFrame
 		labelCeliaco.setBounds(12, 250, 408, 25);
 		contentPane.add(labelCeliaco);
 		
+		labelID = new JLabel();
+		labelID.setText("Pedido número: ");
+		labelID.setBounds(12, 270, 408, 25);
+		contentPane.add(labelID);
+		
 		/*String[] nombreColumnas = {"Descripción", "Precio"}; 
 		String[][] datos = {{null, null}};
 		tablaPizzas.setBackground(null);
 		tablaPizzas = new JTable(datos, nombreColumnas);
-		tablaPizzas.setBounds(12, 290, 408, 100);
+		tablaPizzas.setBounds(12, 310, 408, 100);
 		contentPane.add(tablaPizzas);*/
 	}
 	
@@ -113,14 +119,14 @@ public class VentanaPedido extends JFrame
 		tablaPizzas = new JTable(datos, nombreColumnas);		
 		contentPane.add(tablaPizzas);
 		tablaPizzas.setBackground(null);
-		tablaPizzas.setBounds(12, 290, 408, 100);
+		tablaPizzas.setBounds(12, 310, 408, 100);
 		tablaPizzas.getColumn(0).setMinWidth(100);
 		tablaPizzas.getColumn(1).setMinWidth(100);
 	}
 	
 	public void resetear()
 	{
-		btnEliminarPizza.setText("EliminarPizza");
+		btnEliminarPizza.setText("Eliminar última pizza");
 		btnVerPedido.setText("Ver pedido");
 	}
 	
@@ -128,6 +134,10 @@ public class VentanaPedido extends JFrame
 	public void setLabelPrecioText(String nuevoTexto)
 	{
 		labelPrecio.setText(nuevoTexto);
+	}
+	public void setLabelID(String nuevoTexto)
+	{
+		labelID.setText(nuevoTexto);
 	}
 	public JButton getBtnAniadirPizza()
 	{

@@ -132,7 +132,7 @@ public class EditarCSV
 		return resultado + 1;
 	}
 
-	/*public void delFila(int orden) // Elimina la fila en la posición orden
+	public void delFila(int orden) // Elimina la fila en la posición orden
 	{
 		if (orden >= 0 && orden < (this.datos.length))
 		{
@@ -157,8 +157,22 @@ public class EditarCSV
 		{
 			System.out.println("ERROR(delFila) - Número para la fila a eliminar incorrecto.");
 		}
-	}*/
+	}
 
+	public void eliminarUltimaPizza(Orden ordenActual)
+	{
+		boolean eliminada = false;
+		
+		for(int i = 0; i < datos.length; i++)
+		{
+			if(datos[i][0].equals(String.valueOf(ordenActual.getID())) && eliminada == false)
+			{
+				delFila(i);
+				eliminada = true;
+			}
+		}
+	}
+	
 	public int contarLineasFichero()
 	{
 		int lineas = 0;		

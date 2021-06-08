@@ -64,6 +64,7 @@ public class Controlador
 			{
 				AbrirPedidoDesdePrincipal();
 				ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
+				ventanaPedido.setLabelID("Pedido número: " + nuevaOrden.getID());
 			}
 		});
 		
@@ -90,6 +91,7 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				System.out.println(nuevaOrden.getID());
 				ventanaPizza.resetearVentana();
 				nuevaPizza = new Pizza();
 				AbrirPizzaDesdePedido();
@@ -100,6 +102,7 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				pizzasCSV.eliminarUltimaPizza(nuevaOrden);
 				nuevaOrden.eliminarUltimaPizza();
 			}
 		});
