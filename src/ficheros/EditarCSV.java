@@ -89,6 +89,20 @@ public class EditarCSV
 		}
 	}
 	
+	public Vector<String> buscarPizzasPorPedido(int pedidoID)
+	{
+		Vector<String> resultados = new Vector<String>();
+		
+		for(int i = 0; i < datos.length; i++)
+		{
+			if(datos[i][0].equals(String.valueOf(pedidoID)))
+			{
+				resultados.add(datos[i][1]);
+			}
+		}
+		
+		return resultados;
+	}
 	public void modificarDato(int fila, int columna, String nuevoValor)
 	{
 		datos[fila][columna] = nuevoValor;

@@ -1,5 +1,8 @@
 package mvc;
 
+import java.awt.Component;
+import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +21,8 @@ public class VentanaConfirmar extends JFrame
 	private JTextField scanner;
 	
 	private JLabel labelInstrucciones;
+	
+	Vector<JLabel> labelsBorrar = new Vector<JLabel>();
 		
 	public VentanaConfirmar()
 	{
@@ -45,7 +50,7 @@ public class VentanaConfirmar extends JFrame
 		labelInstrucciones = new JLabel();
 		labelInstrucciones.setText("Introduce el ID del pedido que desea confirmar:");
 		labelInstrucciones.setBounds(12, 30, 408, 25);
-		contentPane.add(labelInstrucciones);
+		contentPane.add(labelInstrucciones);		
 	}
 	
 	public void crearLabel(int posX, int posY, int ancho, int alto, String texto)
@@ -54,6 +59,7 @@ public class VentanaConfirmar extends JFrame
 		labelAux.setBounds(posX, posY, ancho, alto);
 		labelAux.setText(texto);
 		contentPane.add(labelAux);
+		labelsBorrar.add(labelAux);
 	}
 	
 	public JButton getBtnVolver()
@@ -71,5 +77,9 @@ public class VentanaConfirmar extends JFrame
 	public void setInstruccionesText(String nuevoTexto)
 	{
 		this.labelInstrucciones.setText(nuevoTexto);
+	}
+	public Vector<JLabel> getLabelsBorrar()
+	{
+		return this.labelsBorrar;
 	}
 }

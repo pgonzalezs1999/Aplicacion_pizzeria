@@ -72,6 +72,15 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				AbrirPedidoDesdePrincipal();
+				
+				if(ventanaPedido.getLabeles().isEmpty() == false)
+				{
+					for(int i = 0; i < ventanaPedido.getLabeles().size(); i++)
+					{
+						ventanaPedido.getLabeles().get(i).setText("");
+					}
+					ventanaPedido.getLabeles().clear();
+				}			
 				ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
 				ventanaPedido.setLabelID("Pedido número: " + nuevaOrden.getID());
 			}
@@ -99,10 +108,9 @@ public class Controlador
 		this.ventanaPedido.getBtnAniadirPizza().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
-			{
-				System.out.println(nuevaOrden.getID());
-				resetearVentanaPizza();
+			{				
 				nuevaPizza = new Pizza();
+				resetearVentanaPizza();
 				AbrirPizzaDesdePedido();
 			}
 		});
@@ -111,17 +119,15 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				resetearVentanaPedido();
-
 				if(nuevaOrden.getPizzas().isEmpty() == true)
-				{
+				{					
 					ventanaPedido.getBtnEliminarPizza().setText("No hay ninguna pizza que eliminar");
 				}
 				else
 				{
 					pizzasCSV.eliminarUltimaPizza(nuevaOrden);
 					nuevaOrden.eliminarUltimaPizza();
-					resetearVentanaPedido();				
+					ventanaPedido.getLabeles().lastElement().setText("");
 				}
 			}
 		});
@@ -131,26 +137,15 @@ public class Controlador
 			public void actionPerformed(ActionEvent arg0)
 			{
 				resetearVentanaPedido();
-
+				
 				if(nuevaOrden.getPizzas().isEmpty() == false)
 				{
-					String[][] matrizAux = new String[nuevaOrden.getPizzas().size()][5];
-					
-					boolean paraCeliaco = true;
+					int posY = 300;
 					for(int i = 0; i < nuevaOrden.getPizzas().size(); i++)
 					{
-						matrizAux[i][0] = nuevaOrden.getPizzas().get(i).getNombre();
-						matrizAux[i][1] = nuevaOrden.getPizzas().get(i).calcularCostePizza() + " euros";
+						posY += 25;
+						ventanaPedido.crearLabel(12, posY, 408, 25, "- " + nuevaOrden.getPizzas().get(i).getNombre());
 					}
-					if(paraCeliaco == true)
-					{
-						concatenar(ventanaPedido.getLabelPrecioText(), ("Su pedido SI es apto para celiacos\n"));			
-					}
-					else
-					{
-						concatenar(ventanaPedido.getLabelPrecioText(), ("Su pedido NO es apto para celiacos\n"));
-					}
-					ventanaPedido.CrearTablaPizzas(matrizAux);
 				}
 				else
 				{
@@ -181,6 +176,8 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				resetearVentanaPedido();
+				
 				pizzasCSV.cancelarOrden(nuevaOrden);
 				
 				AbrirPrincipalDesdePedido();
@@ -193,6 +190,15 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				if(ventanaPedido.getLabeles().isEmpty() == false)
+				{
+					for(int i = 0; i < ventanaPedido.getLabeles().size(); i++)
+					{
+						ventanaPedido.getLabeles().get(i).setText("");
+					}
+					ventanaPedido.getLabeles().clear();
+				}
+				
 				if(nuevaPizza.getBase() == null)
 				{
 					ventanaPizza.getBtnEnviarPizza().setText("No puede enviar una pizza sin elegir tamaño");
@@ -214,6 +220,7 @@ public class Controlador
 					pizzasCSV.addPizza(nuevaOrden, nuevaPizza);
 					nuevaOrden.aniadirPizza(nuevaPizza);
 					ventanaPedido.setLabelPrecioText("El coste actual de su pedido es: " + nuevaOrden.calcularCostePedido() + "€");
+					
 					AbrirPedidoDesdePizza();
 				}
 			}
@@ -388,6 +395,7 @@ public class Controlador
 			}
 		});
 	}
+	
 	private void crearListenersVentanaHistorial() //---- Listeners Ventana Historial ----//
 	{		
 		this.ventanaHistorial.getBtnVolver().addActionListener(new ActionListener()
@@ -414,7 +422,7 @@ public class Controlador
 				try
 				{
 					int idConfirmar = Integer.parseInt(ventanaConfirmar.getScannerText()) - 1;
-					if(idConfirmar > 0 && idConfirmar < pedidosCSV.contarLineasFichero())
+					if(idConfirmar >= 0 && idConfirmar < pedidosCSV.contarLineasFichero())
 					{
 						pedidosCSV.modificarDato(idConfirmar, 3, "1");						
 					}
@@ -474,13 +482,9 @@ public class Controlador
 		nuevaOrden = new Orden();
 	}
 	
-	public void resetearVentanaPrincipal()
-	{
-		
-	}
 	public void resetearVentanaPedido()
-	{
-		if(nuevaOrden.getPizzas().size() != 0)
+	{		
+		if(nuevaOrden.getPizzas().isEmpty() == false)
 		{
 			boolean aptaCeliacos = true;
 			for(int i = 0; i < nuevaOrden.getPizzas().size(); i++)
@@ -503,7 +507,6 @@ public class Controlador
 		ventanaPedido.getBtnEliminarPizza().setText("Eliminar última pizza");
 		ventanaPedido.getBtnVerPedido().setText("Ver pedido");
 		ventanaPedido.getBtnEnviarPedido().setText("EnviarPedido");
-		
 	}
 	public void resetearVentanaPizza()
 	{
@@ -530,29 +533,49 @@ public class Controlador
 		ventanaPizza.getBtnPina().setBackground(null);
 		ventanaPizza.getBtnEnviarPizza().setText("Enviar pizza");
 	}
-	public void resetearVentanaHistorial()
-	{
-
-	}
 	public void resetearVentanaConfirmar()
 	{
+		eliminarComentariosConfirmar();
+		
 		Vector<String> pedidos = pedidosCSV.pedidosSinConfirmar();
-		if(pedidos.isEmpty() == false)
+		int posXPedido = 12;
+		int posXPizza = 35;
+		int posYactual = 100;
+		String nuevoTexto;
+		if(pedidos.isEmpty() == true)
 		{
-			int posXPedido = 12;
-			int posXPizza = 20;
-			int posYactual = 130;
-			int separacion = 30;
-			String nuevoTexto;
-			
+			nuevoTexto = "¡Estamos al día! Todos nuestros pedidos han sido ya entregados";
+			ventanaConfirmar.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
+		}
+		else
+		{		
 			for(int i = 0; i < pedidos.size(); i++)
 			{
-				nuevoTexto = "ID del pedido: " + pedidos.get(i) + ". Encargado el " + "";
+				posYactual += 35;
+				nuevoTexto = "ID del pedido: " + pedidos.get(i) + ". Emitido el " + "(Rubén haz tu parte!)";
 				ventanaConfirmar.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
-				posYactual += 30;
+				
+				Vector<String> titulos = pizzasCSV.buscarPizzasPorPedido(Integer.parseInt(pedidos.get(i)));
+				
+				for(int j = 0; j < titulos.size(); j++)
+				{
+					posYactual += 20;
+					nuevoTexto = "- " + titulos.get(j);
+					ventanaConfirmar.crearLabel(posXPizza, posYactual, 408, 25, nuevoTexto);
+				}
 			}
 		}
 		ventanaConfirmar.setInstruccionesText("Introduzca el ID del pedido que desea confirmar");
+	}
+	
+	public void eliminarComentariosConfirmar()
+	{
+		for(int i = 0; i < ventanaConfirmar.getLabelsBorrar().size(); i++)
+		{
+			ventanaConfirmar.getLabelsBorrar().get(i).setText("");
+			ventanaConfirmar.getLabelsBorrar().remove(i);
+			i--;
+		}
 	}
 	
 	public void concatenar(String original, String extra)

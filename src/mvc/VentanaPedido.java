@@ -1,6 +1,7 @@
 package mvc;
 
 import java.awt.Color;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +29,8 @@ public class VentanaPedido extends JFrame
 
 	private Color rojoSuave = new Color(255, 200, 200);
 	private Color verdeSuave = new Color(200, 255, 200);
+	
+	Vector<JLabel> labeles = new Vector<JLabel>();
 
 	public VentanaPedido()
 	{
@@ -80,24 +83,15 @@ public class VentanaPedido extends JFrame
 		labelID.setText("Pedido número: ");
 		labelID.setBounds(12, 270, 408, 25);
 		contentPane.add(labelID);
-		
-		/*String[] nombreColumnas = {"Descripción", "Precio"}; 
-		String[][] datos = {{null, null}};
-		tablaPizzas.setBackground(null);
-		tablaPizzas = new JTable(datos, nombreColumnas);
-		tablaPizzas.setBounds(12, 310, 408, 100);
-		contentPane.add(tablaPizzas);*/
 	}
 	
-	public void CrearTablaPizzas(String[][] datos)
+	public void crearLabel(int posX, int posY, int ancho, int alto, String texto)
 	{
-		String[] nombreColumnas = {"Descripción", "Precio"};				
-		tablaPizzas = new JTable(datos, nombreColumnas);		
-		contentPane.add(tablaPizzas);
-		tablaPizzas.setBackground(null);
-		tablaPizzas.setBounds(12, 310, 408, 100);
-		tablaPizzas.getColumn(0).setMinWidth(100);
-		tablaPizzas.getColumn(1).setMinWidth(100);
+		JLabel labelAux = new JLabel();
+		labelAux.setBounds(posX, posY, ancho, alto);
+		labelAux.setText(texto);
+		contentPane.add(labelAux);
+		labeles.add(labelAux);
 	}
 	
 	// Getters/Setters
@@ -136,5 +130,9 @@ public class VentanaPedido extends JFrame
 	public String getLabelPrecioText()
 	{
 		return labelPrecio.getText();
+	}
+	public Vector<JLabel> getLabeles()
+	{
+		return labeles;
 	}
 }
