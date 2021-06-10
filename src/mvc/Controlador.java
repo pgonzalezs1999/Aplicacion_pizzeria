@@ -6,6 +6,7 @@ import java.util.Vector;
 import javax.swing.JLabel;
 
 import ficheros.EditarCSV;
+import ficheros.EditarCSVpedidos;
 import modelo.Base;
 import modelo.Ingrediente;
 import modelo.Orden;
@@ -24,6 +25,7 @@ public class Controlador
 	// Instancias del editor que trabajarán sobre el CSV de pizzas y de pedidos
 	private EditarCSV pizzasCSV = new EditarCSV("pizzas.csv");
 	private EditarCSV pedidosCSV = new EditarCSV("pedidos.csv");
+	private EditarCSVpedidos newPedidosCSV = new EditarCSVpedidos("pedidos.csv");
 	
 	// Ventanas	
 	VentanaPrincipal ventanaPrincipal;
@@ -60,6 +62,7 @@ public class Controlador
 		// Funciones para recibir datos de los CSV y dejarlos listos para trabajar con ellos
 		pizzasCSV.cargarCSV();
 		pedidosCSV.cargarCSV();
+		newPedidosCSV.cargarCSV();
 		
 		nuevaPizza = new Pizza();
 		nuevaOrden = new Orden();
@@ -164,6 +167,8 @@ public class Controlador
 				{
 					AbrirPrincipalDesdePedido();
 					ventanaPrincipal.getLabelPedidoEnviado().setVisible(true);
+					newPedidosCSV.addPedido();
+					
 				}
 				else
 				{

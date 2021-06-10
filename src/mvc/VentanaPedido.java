@@ -92,6 +92,7 @@ public class VentanaPedido extends JFrame
 		labelAux.setText(texto);
 		contentPane.add(labelAux);
 		labeles.add(labelAux);
+		this.repaint();
 	}
 	
 	// Getters/Setters
