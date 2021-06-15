@@ -88,7 +88,17 @@ public class EditarCSV
 			e.printStackTrace();
 		}
 	}
-	
+	public void confirmar(int numID)
+	{
+		for(int i = 0; i < contarLineasFichero(); i++)
+		{
+			if(datos[i][0].equals(String.valueOf(numID)))
+			{
+				datos[i][3] = "1";
+			}
+		}
+		guardarCSV();
+	}
 	public Vector<String> buscarPizzasPorPedido(int pedidoID)
 	{
 		Vector<String> resultados = new Vector<String>();
@@ -204,6 +214,24 @@ public class EditarCSV
 			{
 				pedidos.add(datos[i][0]);
 			}
+		}
+		
+		return pedidos;
+	}
+	
+	public Vector<String> mostrarRegistro()
+	{
+		Vector<String> pedidos = new Vector<String>();
+		
+		for(int i = 0; i < datos.length; i++)
+		{
+			String entregado = "";
+			if(datos[i][3].equals("0"))
+			{
+				entregado = " no";
+			}
+			String nuevoTexto = "Pedido " + datos[i][0] + ": emitido el " + datos[i][1] + " a las " + datos[i][2] + ". Estado:" + entregado + " entregado";
+			pedidos.add(nuevoTexto);
 		}
 		
 		return pedidos;

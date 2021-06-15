@@ -4,7 +4,6 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 public class logger {
     public static void consultar_log(String ruta) { //Imprime el log en formato con guiones por consola
         String linea = "";

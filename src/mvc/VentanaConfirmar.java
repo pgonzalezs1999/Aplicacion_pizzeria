@@ -28,7 +28,7 @@ public class VentanaConfirmar extends JFrame
 	{
 		setTitle("Ventana Principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(250, 100, 700, 600);
+		setBounds(450, 100, 500, 600);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

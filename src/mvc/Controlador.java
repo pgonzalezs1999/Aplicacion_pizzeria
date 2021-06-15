@@ -1,3 +1,7 @@
+/**
+ * Paquete de prueba
+ * @author Pablo Gonzalez Sanchez <a href=mailto:pgonzalezs1999@gmail.com>pgonzalezs1999@gmail.com</a>
+ */
 package mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +15,11 @@ import modelo.Base;
 import modelo.Ingrediente;
 import modelo.Orden;
 import modelo.Pizza;
-
+/**
+ * Clase de prueba
+ * @author Pablo Gonzalez Sanchez
+ *
+ */
 public class Controlador
 {
 	// Declarar los tipos de base e ingrediente que ofrecemos y sus propiedades
@@ -426,12 +434,11 @@ public class Controlador
 			{
 				try
 				{
-					int idConfirmar = Integer.parseInt(ventanaConfirmar.getScannerText()) - 1;
-					if(idConfirmar >= 0 && idConfirmar < pedidosCSV.contarLineasFichero())
+					for(int i = 0; i < pedidosCSV.contarLineasFichero(); i++)
 					{
-						pedidosCSV.modificarDato(idConfirmar, 3, "1");						
+						pedidosCSV.confirmar(Integer.parseInt(ventanaConfirmar.getScannerText()));				
 					}
-				}
+				}				
 				catch(Exception e)
 				{
 					ventanaConfirmar.setInstruccionesText("Introduzca un número válido:");
@@ -444,6 +451,7 @@ public class Controlador
 	private void AbrirHistorialDesdePrincipal()
 	{
 		this.ventanaHistorial.setVisible(true);
+		resetearVentanaHistorial();
 		this.ventanaPrincipal.setVisible(false);
 	}
 	private void AbrirPrincipalDesdeHistorial()
@@ -550,14 +558,14 @@ public class Controlador
 		if(pedidos.isEmpty() == true)
 		{
 			nuevoTexto = "¡Estamos al día! Todos nuestros pedidos han sido ya entregados";
-			ventanaConfirmar.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
+			ventanaConfirmar.crearLabel(posXPedido, posYactual + 35, 408, 25, nuevoTexto);
 		}
 		else
 		{		
 			for(int i = 0; i < pedidos.size(); i++)
 			{
 				posYactual += 35;
-				nuevoTexto = "ID del pedido: " + pedidos.get(i) + ". Emitido el " + "(Rubén haz tu parte!)";
+				nuevoTexto = "Pedido con ID: " + pedidos.get(i);
 				ventanaConfirmar.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
 				
 				Vector<String> titulos = pizzasCSV.buscarPizzasPorPedido(Integer.parseInt(pedidos.get(i)));
@@ -571,6 +579,33 @@ public class Controlador
 			}
 		}
 		ventanaConfirmar.setInstruccionesText("Introduzca el ID del pedido que desea confirmar");
+		ventanaConfirmar.repaint();
+	}
+	
+	public void resetearVentanaHistorial()
+	{
+		eliminarComentariosHistorial();
+		
+		Vector<String> pedidos = pedidosCSV.mostrarRegistro();
+		int posXPedido = 30;
+		int posXPizza = 55;
+		int posYactual = 25;
+		String nuevoTexto;
+		if(pedidos.isEmpty() == true)
+		{
+			nuevoTexto = "Aún no se ha emitido ningún pedido";
+			ventanaHistorial.crearLabel(posXPedido, posYactual + 35, 408, 25, nuevoTexto);
+		}
+		else
+		{		
+			for(int i = 0; i < pedidos.size(); i++)
+			{
+				posYactual += 35;
+				nuevoTexto = pedidos.get(i);
+				ventanaHistorial.crearLabel(posXPedido, posYactual, 408, 25, nuevoTexto);
+			}
+		}
+		ventanaHistorial.repaint();
 	}
 	
 	public void eliminarComentariosConfirmar()
@@ -579,6 +614,16 @@ public class Controlador
 		{
 			ventanaConfirmar.getLabelsBorrar().get(i).setText("");
 			ventanaConfirmar.getLabelsBorrar().remove(i);
+			i--;
+		}
+	}
+	
+	public void eliminarComentariosHistorial()
+	{
+		for(int i = 0; i < ventanaHistorial.getLabelsBorrar().size(); i++)
+		{
+			ventanaHistorial.getLabelsBorrar().get(i).setText("");
+			ventanaHistorial.getLabelsBorrar().remove(i);
 			i--;
 		}
 	}
