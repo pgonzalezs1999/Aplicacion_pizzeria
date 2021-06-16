@@ -15,6 +15,7 @@ public class Pizza
 	private Vector<Ingrediente> ingredientes = new Vector<Ingrediente>(); // Los asignados por el usuario
 	/**
 	 * Metodo para anadir el ingrediente seleccionado a la lista de ingredientes de una pizza
+	 * @param i Ingrediente que se desea anadir
 	 */
 	public void ponerIngrediente(Ingrediente i)
 	{
@@ -22,6 +23,7 @@ public class Pizza
 	}
 	/**
 	 * Metodo para anadir una base seleccionada a una pizza
+	 * @param b Base que se desea anadir
 	 */
 	public void ponerBase(Base b)
 	{
@@ -94,6 +96,7 @@ public class Pizza
 	}
 	/**
 	 * Metodo que designa un nuevo nombre a una pizza
+	 * @param nuevoNombre Nombre que se desea asignar
 	 */
 	public void setNombre(String nuevoNombre)
 	{

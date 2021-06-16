@@ -88,14 +88,16 @@ public class EditarCSVpedidos {
 	
 	
 	
-	private static String fecha() {
+	private static String fecha()
+	{
         LocalDateTime FechaYHoraSinFormato = LocalDateTime.now();
         DateTimeFormatter FormatoDeFechaYHora = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String FechaYHora = FechaYHoraSinFormato.format(FormatoDeFechaYHora);
         return FechaYHora;
     }
 	
-	private static String hora() {
+	private static String hora()
+	{
         LocalDateTime FechaYHoraSinFormato = LocalDateTime.now();
         DateTimeFormatter FormatoDeFechaYHora = DateTimeFormatter.ofPattern("HH:mm");
         String FechaYHora = FechaYHoraSinFormato.format(FormatoDeFechaYHora);
@@ -103,12 +105,13 @@ public class EditarCSVpedidos {
         return FechaYHora;
     }
 	
-	public void addPedido () {
-		
+	public void addPedido ()
+	{
 		String[][] nuevospedidos = new String[this.pedidos.length+1][this.pedidos[0].length];
 		int entregado = 0;
 		
-		for (int i = 1; i<nuevospedidos.length;i++) {
+		for (int i = 1; i<nuevospedidos.length;i++)
+		{
 			nuevospedidos[i] = this.pedidos[i-1];
 		}
 		

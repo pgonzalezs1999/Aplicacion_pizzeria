@@ -26,6 +26,7 @@ public class Orden
 	}
 	/**
 	 * Metodo para anadir una pizza al vector de la orden en curso, una vez que dicha pizza ha sido terminada y comprobado que no tiene errores
+	 * @param nuevaPizza Pizza que se desea anadir
 	 */
 	public void aniadirPizza(Pizza nuevaPizza)
 	{
