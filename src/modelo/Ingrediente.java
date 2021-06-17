@@ -13,6 +13,12 @@ public class Ingrediente
 	private double precio; // Predefinido en el constructor del controlador
 	
 	// Constructor
+	/**
+	 * Inicia el constructor. Almacena los valores proporcionados por el controlador
+	 * @param nuevoNombre Nombre asignado al ingrediente
+	 * @param nuevoGluten Si el ingrediente lleva o no gluten
+	 * @param nuevoPrecio Precio asignado al ingrediente
+	 */
 	public Ingrediente(String nuevoNombre, boolean nuevoGluten, double nuevoPrecio)
 	{
 		// Almacenar en esta clase los datos proporcionados

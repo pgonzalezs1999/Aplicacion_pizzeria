@@ -14,6 +14,13 @@ public class Base
 	private String tamanio; // Predefinido en el constructor del controlador. Solo puede ser "Grande" o "Pequena"
 	
 	// Constructor
+	/**
+	 * Inicia el constructor. Almacena los valores proporcionados por el controlador
+	 * @param nuevoTipo Tipo de base asignada a la base
+	 * @param nuevoGluten Si la base tiene o no gluten
+	 * @param nuevoPrecio Precio asignado a la base
+	 * @param nuevoTamanio Tamano asignado a la base
+	 */
 	public Base(String nuevoTipo, boolean nuevoGluten, double nuevoPrecio, String nuevoTamanio)
 	{
 		// Almacenar en esta clase los datos proporcionados

@@ -19,10 +19,12 @@ public class EditarCSV
 {
 	private String[][] datos; // En esta matriz se almacenara provisionalmente el contenido del CSV
 	String ruta; // Donde se encuentra el archivo
+	
+	// Constructor
 	/**
 	 * Metodo que define que archivo se va a manejar en una instancia de esta clase
+	 * @param nuevaRuta Archivo que se va a gestionar
 	 */
-	// Constructor
 	public EditarCSV(String nuevaRuta)
 	{
 		this.ruta = nuevaRuta; // El archivo se encuentra en la ruta recibida por el parametro

@@ -18,6 +18,9 @@ public class Orden
 	private boolean entregado; // Cuando la pizza ha llegado al domicilio, se marca true
 	
 	// Constructor
+	/**
+	 * Inicia el constructor. Almacena los valores proporcionados por el controlador
+	 */
 	public Orden()
 	{
 		EditarCSV leerPedidos = new EditarCSV("pedidos.csv"); // Cada vez que haya que anadir o eliminar algo del fichero se hara desde esta clase

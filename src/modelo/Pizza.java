@@ -31,6 +31,7 @@ public class Pizza
 	}
 	/**
 	 * Metodo para calcular el coste final de una pizza
+	 * @return Precio de la pizza
 	 */
 	public double calcularCostePizza()
 	{

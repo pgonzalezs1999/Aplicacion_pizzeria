@@ -1,3 +1,7 @@
+/**
+ * Paquete que recoge todas las clases utilizadas para las pruebas JUnit
+ * @author Pablo Gonzalez Sanchez <a href=mailto:pgonzalezs1999@gmail.com>pgonzalezs1999@gmail.com</a>
+ */
 package pruebas;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,7 +11,9 @@ import modelo.Orden;
 import modelo.Pizza;
 
 import org.junit.Before;
-
+/**
+ * Clase que genera las pruebas JUnit
+ */
 class PruebasJUnit
 {
 	Orden orden;
