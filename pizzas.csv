@@ -1,39 +1,28 @@
-13,Pizza pequena con bacon pollo cebolla serrano ,Pequena,0,0,0,0,1,0,0,0,0,1,1,0,1,0,0,0,0
-12,Pizza grande con champinones bacon aceitunas ,Grande,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0
+14,Pizza pequena con bacon aceitunas ,Pequena,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0
+14,Pizza grande con tomate serrano ,Grande,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+13,Pizza grande con bacon aceitunas anchoas ,Grande,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0
+13,Pizza pequena con tomate ,Pequena,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+12,Pizza grande con tomate cebolla caramelizada ,Grande,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+16,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+15,Pizza grande con pollo ,Grande sin gluten,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+15,Pizza pequena con queso ,Pequena,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+14,Pizza pequena con queso ,Pequena,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+12,Pizza pequena con serrano cebolla cebolla caramelizada ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0
 12,Pizza grande con queso sin gluten tomate ,Grande,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+11,Pizza grande con tomate champinones ,Grande sin gluten,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+11,Pizza pequena con tomate queso sin gluten ,Pequena sin gluten,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+11,Pizza pequena con maiz champinones pollo aceitunas ,Pequena sin gluten,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0
+11,Pizza grande con york pimiento anchoas ,Grande sin gluten,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0
 11,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+10,Pizza grande con atun aceitunas bacon ,Grande,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0
+10,Pizza pequena con queso sin gluten queso ,Pequena sin gluten,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 10,Pizza grande con champinones pimiento york ,Grande,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0
 10,Pizza pequena con tomate champinones ,Pequena sin gluten,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 9,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 8,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 7,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-7,Pizza pequena con serrano cebolla ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0
-7,Pizza grande con queso queso sin gluten ,Grande,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-7,Pizza pequena con tomate champinones ,Pequena sin gluten,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
-7,Pizza grande con serrano cebolla cebolla caramelizada ,Grande,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0
-7,Pizza grande con cebolla caramelizada pollo ,Grande,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
-7,Pizza pequena con bacon pollo ,Pequena sin gluten,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0
-7,Pizza pequena con queso ,Pequena,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-7,Pizza grande con cebolla caramelizada serrano queso ,Grande,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0
-7,Pizza pequena con serrano ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-7,Pizza grande con queso sin gluten ,Grande,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-7,Pizza pequena con cebolla ,Pequena,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
-7,Pizza grande con bacon pepperoni ,Grande,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
 7,Pizza grande con champinones ,Grande,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 7,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-17,Pizza pequena con york ,Pequena sin gluten,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
-16,Pizza grande con queso ,Grande,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-15,Pizza grande con pollo ,Grande sin gluten,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
-15,Pizza pequena con queso ,Pequena,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-14,Pizza pequena con queso ,Pequena,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-13,Pizza pequena con serrano ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-12,Pizza pequena con serrano cebolla cebolla caramelizada ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0
-11,Pizza grande con tomate champinones ,Grande sin gluten,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
-11,Pizza pequena con tomate queso sin gluten ,Pequena sin gluten,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-11,Pizza pequena con maiz champinones pollo aceitunas ,Pequena sin gluten,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0
-11,Pizza grande con york pimiento anchoas ,Grande sin gluten,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0
-10,Pizza grande con atun aceitunas bacon ,Grande,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0
-10,Pizza pequena con queso sin gluten queso ,Pequena sin gluten,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 6,Pizza pequena con maiz atun pina ,Pequena sin gluten,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
 5,Pizza pequena con serrano cebolla ,Pequena,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0
 5,Pizza grande con queso queso sin gluten tomate ,Grande,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0

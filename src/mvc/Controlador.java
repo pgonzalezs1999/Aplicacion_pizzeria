@@ -169,6 +169,7 @@ public class Controlador
 				{
 					ventanaPedido.getBtnVerPedido().setText("Ninguna pizza encargada"); // Solo muestra un label de error
 				}
+				ventanaPedido.repaint(); // Refresca la ventana
 			}
 		});
 		this.ventanaPedido.getBtnEnviarPedido().addActionListener(new ActionListener() // Cuando se pulse el boton enviar pedido de la ventana pedido
@@ -188,6 +189,8 @@ public class Controlador
 				{
 					ventanaPedido.getBtnEnviarPedido().setText("No emitimos pedidos vacíos"); // Solo muestra un label de error
 				}
+				resetearVentanaHistorial();
+				resetearVentanaConfirmar();
 			}
 		});	
 		this.ventanaPedido.getBtnCancelarPedido().addActionListener(new ActionListener() // Cuando se pulse el boton cancelar pedido de la ventana pedido
@@ -424,6 +427,7 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				pedidosCSV.cargarCSV(); // Recupera el CSV por si se han editado los datos en otra ventana
 				AbrirPrincipalDesdeHistorial(); // Cambia a la pantalla indicada
 			}
 		});
@@ -437,6 +441,7 @@ public class Controlador
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				pedidosCSV.cargarCSV(); // Recupera el CSV por si se han editado los datos en otra ventana
 				AbrirPrincipalDesdeConfirmar(); // Cambia a la pantalla indicada
 			}
 		});
@@ -455,6 +460,7 @@ public class Controlador
 				{
 					ventanaConfirmar.setInstruccionesText("Introduzca un número válido:"); // Si introduce un valor incorrecto
 				}
+				ventanaConfirmar.setScannerText(""); // Vacia el ultimo valor introducido en el lector, para que se vea una interfaz mas limpia
 				resetearVentanaConfirmar(); // Recupera los valores por defecto de la ventana
 			}
 		});
@@ -516,6 +522,7 @@ public class Controlador
 	 */
 	private void AbrirConfirmarDesdePrincipal()
 	{
+		ventanaConfirmar.setScannerText(""); // Vacia el ultimo valor introducido en el lector, para que se vea una interfaz mas limpia
 		this.ventanaConfirmar.setVisible(true); // Muestra la pantalla
 		this.ventanaPrincipal.setVisible(false); // Oculta la pantalla
 		nuevaOrden = new Orden();

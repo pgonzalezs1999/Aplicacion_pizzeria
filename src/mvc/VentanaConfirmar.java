@@ -33,7 +33,7 @@ public class VentanaConfirmar extends JFrame
 	{
 		setTitle("Ventana Principal"); // Nombre de encabezado de la ventana
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar ventana al salir
-		setBounds(450, 100, 500, 600); // Indicar posicion y dimensiones
+		setBounds(100, 70, 500, 600); // Indicar posicion y dimensiones
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Margenes de la ventana
@@ -97,6 +97,14 @@ public class VentanaConfirmar extends JFrame
 	public String getScannerText()
 	{
 		return this.scanner.getText();
+	}
+	/**
+	 * Metodo que actualiza el texto contenido en el lector de IDs
+	 * @param nuevoTexto Texto que mostrara el lector
+	 */
+	public void setScannerText(String nuevoTexto)
+	{
+		this.scanner.setText(nuevoTexto);
 	}
 	/**
 	 * Metodo que devuelve el label con las indicaciones de la ventana

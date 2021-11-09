@@ -29,7 +29,7 @@ public class VentanaHistorial extends JFrame
 	{
 		setTitle("Ventana Historial"); // Nombre de encabezado de la ventana
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar ventana al salir
-		setBounds(450, 100, 450, 600); // Indicar posicion y dimensiones
+		setBounds(100, 70, 450, 600); // Indicar posicion y dimensiones
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Margenes de la ventana

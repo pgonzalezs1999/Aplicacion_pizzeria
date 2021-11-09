@@ -57,7 +57,7 @@ public class VentanaPizza extends JFrame
 	{
 		setTitle("Ventana Pizza"); // Nombre de encabezado de la ventana
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar ventana al salir
-		setBounds(350, 100, 685, 600); // Indicar posicion y dimensiones
+		setBounds(100, 70, 685, 600); // Indicar posicion y dimensiones
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Margenes de la ventana
